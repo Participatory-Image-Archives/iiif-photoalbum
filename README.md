@@ -1,2 +1,2 @@
-# iiif-photoalbum
-SGV_10 Photo Albums Manifest
+# IIIF Manifests for SGV_10 Photo Albums
+The purpose of this repository is to develop a script that can generate [IIIF Presentation API 3.0](https://iiif.io/api/presentation/3.0/) resources for photo albums of the SGV_10 Kreis Family Collection.
