@@ -38,12 +38,11 @@ manifest.provider = [p]
 manifest.rights = "http://creativecommons.org/licenses/by-nc/4.0/"
 manifest.requiredStatement = KeyValueString(label="Attribution", value="Swiss Society for Folklore Studies (SSFS)")
 
-### Left-to-right
+### Viewing Direction and Behavior
 manifest.viewingDirection = "left-to-right"
 manifest.behavior = ["paged"]
 
 ### Thumbnail
-
 thumbnail = ResourceItem(id=sipi+"SGV_10A_00050_001.jp2/full/80,/0/default.jpg",
                          type="Image",
                          format="image/jpeg")
@@ -55,14 +54,16 @@ thumbnail.make_service(id=sipi+"SGV_10A_00050_001.jp2",
 manifest.thumbnail = [thumbnail]
 
 # Canvases
-
+canvas_id = 1
 with open('sequence.txt','r') as x:
     for i in x:
-        canvas = manifest.make_canvas_from_iiif(url=sipi+f"{i}",
-                                        label=f"{i}",
-                                        id=manifestserver + f"/canvas/p{i}",
-                                        anno_id=manifestserver + f"/annotation/p{i}-image",
-                                        anno_page_id=manifestserver + f"/page/p{i}/1")
+        canvas = manifest.make_canvas_from_iiif(url=sipi+f"{i.strip()}",
+                                        label=f"{i.strip()}",
+                                        id=manifestserver + f"/canvas/p{canvas_id}",
+                                        anno_id=manifestserver + f"/annotation/p{canvas_id}",
+                                        anno_page_id=manifestserver + f"/page/p{canvas_id}")
+
+        canvas_id +=1
 
 output = open(manifestid+extension,'w')
 print(manifest.json(indent=2), file=output)
