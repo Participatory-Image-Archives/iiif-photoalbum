@@ -1,6 +1,6 @@
 {
   "@context": "http://iiif.io/api/presentation/3/context.json",
-  "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050/manifest.json",
+  "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050.json",
   "type": "Manifest",
   "label": {
     "en": [
@@ -47,7 +47,7 @@
   ],
   "summary": {
     "en": [
-      "A very nice album"
+      "A very nice album of the SGV_10 Familie Kreis Collection"
     ]
   },
   "requiredStatement": {

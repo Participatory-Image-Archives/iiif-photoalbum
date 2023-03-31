@@ -15,7 +15,7 @@ gnd = "https://d-nb.info/gnd/1186091584"
 config.configs['helpers.auto_fields.AutoLang'].auto_lang = "en"
 
 ### Creation of the Manifest
-manifest = Manifest(id=manifestserver+"/"+manifestid+"/manifest.json",
+manifest = Manifest(id=manifestserver+"/"+manifestid+extension,
                     label="Album SGV_10A_00050")
 
 ### Summary of the Resource
