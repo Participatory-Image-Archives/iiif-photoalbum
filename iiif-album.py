@@ -1,7 +1,7 @@
 from iiif_prezi3 import config, Manifest, KeyValueString, ResourceItem, ProviderItem, ExternalItem, HomepageItem
 
 ### IIIF Resource Servers
-sipi = "http://sipi.participatory-archives.ch/SGV_10/album"
+sipi = "http://sipi.participatory-archives.ch/SGV_10/album/"
 manifestserver = "https://julsraemy.ch/hostiiing/manifests"
 manifestid = "SGV_10A_00050"
 extension = ".json"
@@ -44,47 +44,25 @@ manifest.behavior = ["paged"]
 
 ### Thumbnail
 
-thumbnail = ResourceItem(id=sipi+"/SGV_10A_00050_001.jp2/full/80,/0/default.jpg",
+thumbnail = ResourceItem(id=sipi+"SGV_10A_00050_001.jp2/full/80,/0/default.jpg",
                          type="Image",
                          format="image/jpeg")
 
-thumbnail.make_service(id=sipi+"/SGV_10A_00050_001.jp2",
+thumbnail.make_service(id=sipi+"SGV_10A_00050_001.jp2",
                        type="ImageService3",
                        profile="level2")
 
 manifest.thumbnail = [thumbnail]
 
-# IIIF Image API Info JSON
+# Canvases
 
-canvas1 = manifest.make_canvas_from_iiif(url=sipi+"/SGV_10A_00050_001.jp2",
-                                        label="SGV_10A_00050_001",
-                                        id=manifestserver + "/canvas/p1",
-                                        anno_id=manifestserver + "/annotation/p0001-image",
-                                        anno_page_id=manifestserver + "/page/p1/1")
+with open('sequence.txt','r') as x:
+    for i in x:
+        canvas = manifest.make_canvas_from_iiif(url=sipi+f"{i}",
+                                        label=f"{i}",
+                                        id=manifestserver + f"/canvas/p{i}",
+                                        anno_id=manifestserver + f"/annotation/p{i}-image",
+                                        anno_page_id=manifestserver + f"/page/p{i}/1")
 
-canvas2 = manifest.make_canvas_from_iiif(url=sipi+"/SGV_10A_00050_002.jp2",
-                                        label="SGV_10A_00050_002",
-                                        id=manifestserver + "/canvas/p2",
-                                        anno_id=manifestserver + "/annotation/p0002-image",
-                                        anno_page_id=manifestserver + "/page/p2/1")
-
-canvas3 = manifest.make_canvas_from_iiif(url=sipi+"/SGV_10A_00050_003.jp2",
-                                        label="SGV_10A_00050_003",
-                                        id=manifestserver + "/canvas/p3",
-                                        anno_id=manifestserver + "/annotation/p0003-image",
-                                        anno_page_id=manifestserver + "/page/p3/1")
-
-canvas4 = manifest.make_canvas_from_iiif(url=sipi+"/SGV_10A_00050_002_und_003.jp2",
-                                        label="SGV_10A_00050_002_und_003",
-                                        id=manifestserver + "/canvas/p4",
-                                        anno_id=manifestserver + "/annotation/p0004-image",
-                                        anno_page_id=manifestserver + "/page/p4/1")
-
-canvas5 = manifest.make_canvas_from_iiif(url=sipi+"/SGV_10A_00050_004.jp2",
-                                        label="SGV_10A_00050_004",
-                                        id=manifestserver + "/canvas/p5",
-                                        anno_id=manifestserver + "/annotation/p0005-image",
-                                        anno_page_id=manifestserver + "/page/p5/1")
-
-f = open(manifestid+extension,'w')
-print(manifest.json(indent=2), file=f)
+output = open(manifestid+extension,'w')
+print(manifest.json(indent=2), file=output)
