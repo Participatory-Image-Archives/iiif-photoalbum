@@ -69,5 +69,4 @@ with open('sequence_paged.txt','r') as x:
         canvas_id +=1
 
 output = open(manifest_id+extension,'w')
-sipi.replace("http://sipi.participatory-archives.ch/SGV_10/album/", "https://sipi.participatory-archives.ch/SGV_10/album/")
 print(manifest.json(indent=2), file=output)
