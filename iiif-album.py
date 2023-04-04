@@ -3,7 +3,7 @@ from iiif_prezi3 import config, Manifest, KeyValueString, ResourceItem, Provider
 ### IIIF Resource Servers
 sipi = "http://sipi.participatory-archives.ch/SGV_10/album/"
 manifestserver = "https://julsraemy.ch/hostiiing/manifests"
-manifestid = "SGV_10A_00050"
+manifest_id = "SGV_10A_00050_paged"
 extension = ".json"
 
 ### SGV Photo Archive Website and GND
@@ -15,7 +15,7 @@ gnd = "https://d-nb.info/gnd/1186091584"
 config.configs['helpers.auto_fields.AutoLang'].auto_lang = "en"
 
 ### Creation of the Manifest
-manifest = Manifest(id=manifestserver+"/"+manifestid+extension,
+manifest = Manifest(id=manifestserver+"/"+manifest_id+extension,
                     label="Album SGV_10A_00050")
 
 ### Summary of the Resource
@@ -55,7 +55,7 @@ manifest.thumbnail = [thumbnail]
 
 # Canvases
 canvas_id = 1
-with open('sequence.txt','r') as x:
+with open('sequence_paged.txt','r') as x:
     for i in x:
         canvas = manifest.make_canvas_from_iiif(url=sipi+f"{i.strip()}",
                                         label=f"{i.strip()}",
@@ -65,5 +65,5 @@ with open('sequence.txt','r') as x:
 
         canvas_id +=1
 
-output = open(manifestid+extension,'w')
+output = open(manifest_id+extension,'w')
 print(manifest.json(indent=2), file=output)
