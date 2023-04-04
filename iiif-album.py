@@ -62,9 +62,9 @@ with open('sequence_paged.txt','r') as x:
     for i in x:
         canvas = manifest.make_canvas_from_iiif(url=sipi+f"{i.strip()}",
                                         label=f"{i.strip()}",
-                                        id=manifestserver + f"/canvas/p{canvas_id}",
-                                        anno_id=manifestserver + f"/annotation/p{canvas_id}",
-                                        anno_page_id=manifestserver + f"/page/p{canvas_id}")
+                                        id=manifestserver + "/" + manifest_id + f"/canvas/p{canvas_id}",
+                                        anno_id=manifestserver + "/" + manifest_id + f"/annotation/p{canvas_id}",
+                                        anno_page_id=manifestserver + "/" + manifest_id + f"/page/p{canvas_id}")
 
         canvas_id +=1
 
