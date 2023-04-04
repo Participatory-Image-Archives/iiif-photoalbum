@@ -70,7 +70,7 @@
       "type": "Agent",
       "label": {
         "en": [
-          "Schweizerische Gesellschaft für Volkskunde. Fotoarchiv"
+          "Schweizerische Gesellschaft f\u00fcr Volkskunde. Fotoarchiv"
         ]
       },
       "homepage": [
@@ -91,6 +91,13 @@
           "type": "Image",
           "height": 149,
           "width": 500,
+          "service": [
+            {
+              "id": "https://sipi.participatory-archives.ch/SGV_logo.jp2",
+              "type": "ImageService3",
+              "profile": "level2"
+            }
+          ],
           "format": "image/jpg"
         }
       ]
@@ -109,6 +116,9 @@
       ],
       "format": "image/jpeg"
     }
+  ],
+  "behavior": [
+    "paged"
   ],
   "items": [
     {

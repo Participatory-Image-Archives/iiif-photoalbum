@@ -3,7 +3,7 @@ from iiif_prezi3 import config, Manifest, KeyValueString, ResourceItem, Provider
 ### IIIF Resource Servers
 sipi = "http://sipi.participatory-archives.ch/SGV_10/album/"
 manifestserver = "https://julsraemy.ch/hostiiing/manifests"
-manifest_id = "SGV_10A_00050_paged"
+manifest_id = "SGV_10A_00050"
 extension = ".json"
 
 ### SGV Photo Archive Website and GND
@@ -30,6 +30,9 @@ manifest.metadata = [
 
 ### Appending provider
 l = ResourceItem(id=sgvlogo,type="Image",format="image/jpg",height=149,width=500)
+l.make_service(id="https://sipi.participatory-archives.ch/SGV_logo.jp2",
+                       type="ImageService3",
+                       profile="level2")
 hsgv = HomepageItem(id=sgv,type="Text",format="text/html",label="SGV Fotoarchiv")
 p = ProviderItem(id=gnd, label="Schweizerische Gesellschaft für Volkskunde. Fotoarchiv",homepage=[hsgv],logo=[l])
 manifest.provider = [p]
@@ -55,7 +58,7 @@ manifest.thumbnail = [thumbnail]
 
 # Canvases
 canvas_id = 1
-with open('sequence_paged.txt','r') as x:
+with open('sequence.txt','r') as x:
     for i in x:
         canvas = manifest.make_canvas_from_iiif(url=sipi+f"{i.strip()}",
                                         label=f"{i.strip()}",
