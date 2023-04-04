@@ -5,6 +5,6 @@ With the help of the script, the following IIIF Manifests, currently hosted at `
 
 - A Manifest containing all digitised pages, with scans of pages with protective film and loose photographs: https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050.json 
 - A Manifest tagged with the `paged` behavior containing only the digitised pages, i.e. without protective film and loose photographs: https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050_paged.json 
-- A Manifest containing all digitised pages and the scans with protective film are annotated as layers onto the relevant Canvases: `TBD`
+- A Manifest containing all digitised pages and the scans with protective film are annotated as layers onto the relevant Canvases: https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050_layers.json (`not yet available`)
 
 A dedicated IIIF Collection pointing to the above Manifests has also been created: https://julsraemy.ch/hostiiing/collections/SGV_10A_00050.json
