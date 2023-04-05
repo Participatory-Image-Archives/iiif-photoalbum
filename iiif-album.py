@@ -16,7 +16,7 @@ config.configs['helpers.auto_fields.AutoLang'].auto_lang = "en"
 
 ### Creation of the Manifest
 manifest = Manifest(id=manifestserver+"/"+manifest_id+extension,
-                    label="Album SGV_10A_00050")
+                    label="Album SGV_10A_00050 (Paged)")
 
 ### Summary of the Resource
 manifest.summary = ("A very nice album of the SGV_10 Familie Kreis Collection")
