@@ -1680,45 +1680,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050_paged/canvas/p41",
-      "type": "Canvas",
-      "label": {
-        "en": [
-          "SGV_10A_00050_Deckel_Innen.jp2"
-        ]
-      },
-      "height": 1848,
-      "width": 5000,
-      "items": [
-        {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050_paged/page/p41",
-          "type": "AnnotationPage",
-          "items": [
-            {
-              "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050_paged/annotation/p41",
-              "type": "Annotation",
-              "motivation": "painting",
-              "body": {
-                "id": "https://sipi.participatory-archives.ch/SGV_10/album/SGV_10A_00050_Deckel_Innen.jp2/full/max/0/default.jpg",
-                "type": "Image",
-                "height": 1848,
-                "width": 5000,
-                "service": [
-                  {
-                    "id": "https://sipi.participatory-archives.ch/SGV_10/album/SGV_10A_00050_Deckel_Innen.jp2",
-                    "type": "ImageService3",
-                    "profile": "level2"
-                  }
-                ],
-                "format": "image/jpeg"
-              },
-              "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050_paged/canvas/p41"
-            }
-          ]
-        }
-      ]
     }
   ]
 }
