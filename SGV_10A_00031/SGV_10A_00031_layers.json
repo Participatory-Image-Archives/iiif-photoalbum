@@ -105,11 +105,11 @@
   ],
   "thumbnail": [
     {
-      "id": "https://sipi.participatory-archives.ch/SGV_10/SGV_10A_00030_001.jp2/full/80,/0/default.jpg",
+      "id": "https://sipi.participatory-archives.ch/SGV_10/SGV_10A_00031_001.jp2/full/80,/0/default.jpg",
       "type": "Image",
       "service": [
         {
-          "id": "https://sipi.participatory-archives.ch/SGV_10/SGV_10A_00030_001.jp2",
+          "id": "https://sipi.participatory-archives.ch/SGV_10/SGV_10A_00031_001.jp2",
           "type": "ImageService3",
           "profile": "level2"
         }

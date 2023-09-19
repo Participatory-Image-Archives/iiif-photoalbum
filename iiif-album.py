@@ -46,11 +46,11 @@ manifest.viewingDirection = "left-to-right"
 manifest.behavior = ["paged"]
 
 ### Thumbnail
-thumbnail = ResourceItem(id=sipi+"SGV_10A_00030_001.jp2/full/80,/0/default.jpg",
+thumbnail = ResourceItem(id=sipi+"SGV_10A_00031_001.jp2/full/80,/0/default.jpg",
                          type="Image",
                          format="image/jpeg")
 
-thumbnail.make_service(id=sipi+"SGV_10A_00030_001.jp2",
+thumbnail.make_service(id=sipi+"SGV_10A_00031_001.jp2",
                        type="ImageService3",
                        profile="level2")
 
