@@ -3,7 +3,7 @@ from iiif_prezi3 import config, Manifest, KeyValueString, ResourceItem, Provider
 ### IIIF Resource Servers
 sipi = "http://sipi.participatory-archives.ch/SGV_10/"
 manifestserver = "https://julsraemy.ch/hostiiing/manifests"
-manifest_id = "SGV_10A_00031"
+manifest_id = "SGV_10A_00031_paged"
 extension = ".json"
 
 ### SGV Photo Archive Website and GND
@@ -16,7 +16,7 @@ config.configs['helpers.auto_fields.AutoLang'].auto_lang = "en"
 
 ### Creation of the Manifest
 manifest = Manifest(id=manifestserver+"/"+manifest_id+extension,
-                    label="Album SGV_10A_00031")
+                    label="Album SGV_10A_00031 (Paged)")
 
 ### Summary of the Resource
 manifest.summary = ("A very nice album of the SGV_10 Familie Kreis Collection")
@@ -43,7 +43,7 @@ manifest.requiredStatement = KeyValueString(label="Attribution", value="Swiss So
 
 ### Viewing Direction and Behavior
 manifest.viewingDirection = "left-to-right"
-# manifest.behavior = ["paged"]
+manifest.behavior = ["paged"]
 
 ### Thumbnail
 thumbnail = ResourceItem(id=sipi+"SGV_10A_00030_001.jp2/full/80,/0/default.jpg",
@@ -58,7 +58,7 @@ manifest.thumbnail = [thumbnail]
 
 # Canvases
 canvas_id = 1
-with open('SGV_10A_00031/sequence.txt','r') as x:
+with open('SGV_10A_00031/sequence_paged.txt','r') as x:
     for i in x:
         canvas = manifest.make_canvas_from_iiif(url=sipi+f"{i.strip()}",
                                         label=f"{i.strip()}",
