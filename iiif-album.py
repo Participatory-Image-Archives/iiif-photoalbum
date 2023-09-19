@@ -1,9 +1,9 @@
 from iiif_prezi3 import config, Manifest, KeyValueString, ResourceItem, ProviderItem, ExternalItem, HomepageItem
 
 ### IIIF Resource Servers
-sipi = "http://sipi.participatory-archives.ch/SGV_10/album/"
+sipi = "http://sipi.participatory-archives.ch/SGV_10/"
 manifestserver = "https://julsraemy.ch/hostiiing/manifests"
-manifest_id = "SGV_10A_00050_paged"
+manifest_id = "SGV_10A_00031"
 extension = ".json"
 
 ### SGV Photo Archive Website and GND
@@ -16,16 +16,16 @@ config.configs['helpers.auto_fields.AutoLang'].auto_lang = "en"
 
 ### Creation of the Manifest
 manifest = Manifest(id=manifestserver+"/"+manifest_id+extension,
-                    label="Album SGV_10A_00050 (Paged)")
+                    label="Album SGV_10A_00031")
 
 ### Summary of the Resource
 manifest.summary = ("A very nice album of the SGV_10 Familie Kreis Collection")
 
 ### Appending descriptive Metadata
 manifest.metadata = [
-    KeyValueString(label="Title", value="Photo Album SGV_10A_00050"),
+    KeyValueString(label="Title", value="Photo Album SGV_10A_00031"),
     KeyValueString(label="Collection", value="SGV_10 Familie Kreis"),
-    KeyValueString(label="Identifier", value="SGV_10A_00050"),
+    KeyValueString(label="Identifier", value="SGV_10A_00031"),
 ]   
 
 ### Appending provider
@@ -43,14 +43,14 @@ manifest.requiredStatement = KeyValueString(label="Attribution", value="Swiss So
 
 ### Viewing Direction and Behavior
 manifest.viewingDirection = "left-to-right"
-manifest.behavior = ["paged"]
+# manifest.behavior = ["paged"]
 
 ### Thumbnail
-thumbnail = ResourceItem(id=sipi+"SGV_10A_00050_001.jp2/full/80,/0/default.jpg",
+thumbnail = ResourceItem(id=sipi+"SGV_10A_00030_001.jp2/full/80,/0/default.jpg",
                          type="Image",
                          format="image/jpeg")
 
-thumbnail.make_service(id=sipi+"SGV_10A_00050_001.jp2",
+thumbnail.make_service(id=sipi+"SGV_10A_00030_001.jp2",
                        type="ImageService3",
                        profile="level2")
 
@@ -58,7 +58,7 @@ manifest.thumbnail = [thumbnail]
 
 # Canvases
 canvas_id = 1
-with open('sequence_paged.txt','r') as x:
+with open('SGV_10A_00031/sequence.txt','r') as x:
     for i in x:
         canvas = manifest.make_canvas_from_iiif(url=sipi+f"{i.strip()}",
                                         label=f"{i.strip()}",
