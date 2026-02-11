@@ -5,7 +5,7 @@ from collections import OrderedDict
 from iiif_prezi3 import config, Manifest, KeyValueString, ResourceItem, ProviderItem, ExternalItem, HomepageItem
 
 ### Variables to change per album
-album_id = "SGV_10A_00050"
+album_id = "SGV_10A_00031"
 collection_name = "SGV_10 Familie Kreis"
 summary = "A very nice album of the SGV_10 Familie Kreis Collection"
 rights = "http://creativecommons.org/licenses/by-nc/4.0/"
@@ -124,6 +124,7 @@ for sequence_file, behavior in manifests_to_generate:
 ### Generate layers manifest
 manifest_id = f"{album_id}_layers"
 manifest = setup_manifest(manifest_id, "paged")
+manifest.label = {"en": [f"Album {album_id} (Layers)"]}
 
 # Group images: base images start new canvases, _mit_ variants are layers
 groups = OrderedDict()
@@ -166,7 +167,7 @@ for base_image, layer_images in groups.items():
         lw, lh = fetch_dimensions(layer_name)
         canvas.add_image(image_url=layer_url+"/full/max/0/default.jpg",
                          anno_id=manifestserver + "/" + manifest_id + f"/annotation/p{canvas_id}/{layer_idx}",
-                         anno_page_id=manifestserver + "/" + manifest_id + f"/page/p{canvas_id}",
+                         anno_page_id=manifestserver + "/" + manifest_id + f"/page/p{canvas_id}/{layer_idx}",
                          format="image/jpeg",
                          height=lh,
                          width=lw)

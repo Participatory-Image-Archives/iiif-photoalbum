@@ -4,7 +4,7 @@
   "type": "Manifest",
   "label": {
     "en": [
-      "Album SGV_10A_00031 (Paged)"
+      "Album SGV_10A_00031 (Layers)"
     ]
   },
   "metadata": [
@@ -143,7 +143,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p1",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p1/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -226,7 +226,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p3",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p3/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -309,7 +309,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p5",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p5/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -328,7 +328,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p5",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p5/3",
           "type": "AnnotationPage",
           "items": [
             {
@@ -347,7 +347,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p5",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p5/4",
           "type": "AnnotationPage",
           "items": [
             {
@@ -430,7 +430,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p7",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p7/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -513,7 +513,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p9",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p9/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -596,7 +596,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p11",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p11/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -679,7 +679,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p13",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p13/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -762,7 +762,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p15",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p15/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -845,7 +845,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p17",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p17/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -928,7 +928,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p19",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p19/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1011,7 +1011,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p21",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p21/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1094,7 +1094,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p23",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p23/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1177,7 +1177,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p25",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p25/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1260,7 +1260,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p27",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p27/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1343,7 +1343,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p29",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p29/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1424,7 +1424,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p31",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p31/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1507,7 +1507,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p33",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p33/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1590,7 +1590,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p35",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p35/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1673,7 +1673,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p37",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p37/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1752,7 +1752,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p39",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p39/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1835,7 +1835,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p41",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p41/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -1982,7 +1982,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p45",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p45/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2065,7 +2065,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p47",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p47/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2148,7 +2148,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p49",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p49/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2231,7 +2231,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p51",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p51/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2314,7 +2314,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p53",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p53/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2397,7 +2397,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p55",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p55/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2478,7 +2478,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p57",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p57/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2561,7 +2561,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p59",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p59/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2644,7 +2644,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p61",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p61/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2727,7 +2727,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p63",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p63/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2810,7 +2810,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p65",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p65/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2893,7 +2893,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p67",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p67/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -2976,7 +2976,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p69",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p69/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -3059,7 +3059,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p71",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p71/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -3142,7 +3142,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p73",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p73/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -3225,7 +3225,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p75",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p75/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -3308,7 +3308,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p77",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p77/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -3455,7 +3455,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p81",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p81/2",
           "type": "AnnotationPage",
           "items": [
             {
@@ -3570,7 +3570,7 @@
           ]
         },
         {
-          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p84",
+          "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers/page/p84/2",
           "type": "AnnotationPage",
           "items": [
             {
