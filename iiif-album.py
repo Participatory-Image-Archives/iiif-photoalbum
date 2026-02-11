@@ -2,10 +2,10 @@ import math
 import re
 import requests
 from collections import OrderedDict
-from iiif_prezi3 import config, Manifest, KeyValueString, ResourceItem, ProviderItem, ExternalItem, HomepageItem
+from iiif_prezi3 import config, Manifest, KeyValueString, ResourceItem, ProviderItem, ExternalItem, HomepageItem, Annotation, AnnotationPage, Choice
 
 ### Variables to change per album
-album_id = "SGV_10A_00031"
+album_id = "SGV_10A_00050"
 collection_name = "SGV_10 Familie Kreis"
 summary = "A very nice album of the SGV_10 Familie Kreis Collection"
 rights = "http://creativecommons.org/licenses/by-nc/4.0/"
@@ -153,24 +153,35 @@ for base_image, layer_images in groups.items():
                                   height=h,
                                   width=w)
 
-    # First image (base) as primary annotation
-    canvas.add_image(image_url=image_url+"/full/max/0/default.jpg",
-                     anno_id=manifestserver + "/" + manifest_id + f"/annotation/p{canvas_id}",
-                     anno_page_id=manifestserver + "/" + manifest_id + f"/page/p{canvas_id}",
-                     format="image/jpeg",
-                     height=h,
-                     width=w)
-
-    # Additional layers on the same canvas
-    for layer_idx, layer_name in enumerate(layer_images[1:], start=2):
-        layer_url = imageserver + layer_name
-        lw, lh = fetch_dimensions(layer_name)
-        canvas.add_image(image_url=layer_url+"/full/max/0/default.jpg",
-                         anno_id=manifestserver + "/" + manifest_id + f"/annotation/p{canvas_id}/{layer_idx}",
-                         anno_page_id=manifestserver + "/" + manifest_id + f"/page/p{canvas_id}/{layer_idx}",
+    if len(layer_images) == 1:
+        # Single image, no layers needed
+        canvas.add_image(image_url=image_url+"/full/max/0/default.jpg",
+                         anno_id=manifestserver + "/" + manifest_id + f"/annotation/p{canvas_id}",
+                         anno_page_id=manifestserver + "/" + manifest_id + f"/page/p{canvas_id}",
                          format="image/jpeg",
-                         height=lh,
-                         width=lw)
+                         height=h,
+                         width=w)
+    else:
+        # Multiple layers: use a Choice body so viewers can toggle between them
+        choice_items = []
+        for layer_name in layer_images:
+            lw, lh = fetch_dimensions(layer_name)
+            # Derive a readable label from the filename
+            label = layer_name.replace(".tif", "").replace(album_id + "_", "")
+            item = ResourceItem(id=imageserver + layer_name + "/full/max/0/default.jpg",
+                                type="Image", format="image/jpeg",
+                                height=lh, width=lw,
+                                label={"en": [label]})
+            choice_items.append(item)
+
+        choice_body = Choice(items=choice_items)
+        anno = Annotation(id=manifestserver + "/" + manifest_id + f"/annotation/p{canvas_id}",
+                          type="Annotation", motivation="painting",
+                          body=choice_body,
+                          target=manifestserver + "/" + manifest_id + f"/canvas/p{canvas_id}")
+        anno_page = AnnotationPage(id=manifestserver + "/" + manifest_id + f"/page/p{canvas_id}",
+                                   type="AnnotationPage", items=[anno])
+        canvas.items = [anno_page]
 
     canvas_id +=1
 
