@@ -5,9 +5,12 @@ from collections import OrderedDict
 from iiif_prezi3 import config, Manifest, KeyValueString, ResourceItem, ProviderItem, ExternalItem, HomepageItem, Annotation, AnnotationPage, Choice
 
 ### Variables to change per album
-album_id = "SGV_10A_00050"
+album_id = "SGV_10A_00031"
+title = "[Gebundenes Album mit blauem Textileinband zu einer Familienreise nach Norditalien und Gruppenreisen nach Frankreich]" ## [Gebundenes Album mit Rosenmuster mit Fotografien eines Patenkindes]
+description = "Grossformatiges Album in Kordelbindung im Querformat. Blauer Textileinband mit Lochung aber ohne erhaltene Kordel. Hellgrau marmoriertes Vorsatzpapier, ein Leinengewebe verstärkt den Buchrücken. 40 dunkelgraue Albumseiten mit Pergamin-Schutzblättern mit jeweils sechs oder mehr Silbergelatine-Abzügen DOP pro Seite. Das Album zeigt die Familie Kreis auf einer Norditalienreise 1927 durch Mailand, Venedig, Pisa und Florenz sowie Gruppenausflügen von Walter Kreis nach Grenoble, Arles, Lyon und Strassburg und ins Wallis. Die Reisen sind mit Ortsangabe und Datum handschriftlich betitelt. Das Album gehörte sehr wahrscheinlich Walter Kreis und ein Grossteil der Fotografien wurden von ihm hergestellt. Die Fotografien wurden mit doppelseitigen, dreieckigen Fotoklebern montiert. Das letzte Albumdrittel wurde leer gelassen. Kleine Etikette im hinteren Buchdeckel unten rechts “Papyrus Basel AG Basel”. Das Album und die enthaltenen Fotografien wurden gereinigt und restauriert."
+year = "1926" ## 1949
 collection_name = "SGV_10 Familie Kreis"
-summary = "A very nice album of the SGV_10 Familie Kreis Collection"
+summary = "A photo album of the SGV_10 Familie Kreis collection, digitised within the Participatory Knowledge Practices in Analogue and Digital Image Archives (PIA) research project"
 rights = "http://creativecommons.org/licenses/by-nc/4.0/"
 attribution = "Cultural Anthropology Switzerland (CAS)"
 
@@ -65,9 +68,11 @@ def setup_manifest(manifest_id, behavior):
                         label=f"Album {album_id} ({behavior.title()})")
     manifest.summary = summary
     manifest.metadata = [
-        KeyValueString(label="Title", value=f"Photo Album {album_id}"),
+        KeyValueString(label="Title", value=title),
         KeyValueString(label="Collection", value=collection_name),
         KeyValueString(label="Identifier", value=album_id),
+        KeyValueString(label="Year", value=year),
+        KeyValueString(label="Description", value=description),
     ]
     l = ResourceItem(id=caslogo,type="Image",format="image/svg+xml")
     hcas = HomepageItem(id=cas,type="Text",format="text/html",label="EKWS Fotoarchiv")
@@ -116,6 +121,9 @@ for sequence_file, behavior in manifests_to_generate:
                              format="image/jpeg",
                              height=h,
                              width=w)
+            canvas.items[0].items[0].body.make_service(id=image_url,
+                                                        type="ImageService3",
+                                                        profile="level2")
 
             canvas_id +=1
 
@@ -161,6 +169,9 @@ for base_image, layer_images in groups.items():
                          format="image/jpeg",
                          height=h,
                          width=w)
+        canvas.items[0].items[0].body.make_service(id=image_url,
+                                                    type="ImageService3",
+                                                    profile="level2")
     else:
         # Multiple layers: use a Choice body so viewers can toggle between them
         choice_items = []
@@ -172,6 +183,9 @@ for base_image, layer_images in groups.items():
                                 type="Image", format="image/jpeg",
                                 height=lh, width=lw,
                                 label={"en": [label]})
+            item.make_service(id=imageserver + layer_name,
+                              type="ImageService3",
+                              profile="level2")
             choice_items.append(item)
 
         choice_body = Choice(items=choice_items)

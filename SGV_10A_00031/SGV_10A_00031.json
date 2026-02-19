@@ -16,7 +16,7 @@
       },
       "value": {
         "en": [
-          "Photo Album SGV_10A_00031"
+          "[Gebundenes Album mit blauem Textileinband zu einer Familienreise nach Norditalien und Gruppenreisen nach Frankreich]"
         ]
       }
     },
@@ -43,11 +43,35 @@
           "SGV_10A_00031"
         ]
       }
+    },
+    {
+      "label": {
+        "en": [
+          "Year"
+        ]
+      },
+      "value": {
+        "en": [
+          "1926"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Description"
+        ]
+      },
+      "value": {
+        "en": [
+          "Grossformatiges Album in Kordelbindung im Querformat. Blauer Textileinband mit Lochung aber ohne erhaltene Kordel. Hellgrau marmoriertes Vorsatzpapier, ein Leinengewebe verstärkt den Buchrücken. 40 dunkelgraue Albumseiten mit Pergamin-Schutzblättern mit jeweils sechs oder mehr Silbergelatine-Abzügen DOP pro Seite. Das Album zeigt die Familie Kreis auf einer Norditalienreise 1927 durch Mailand, Venedig, Pisa und Florenz sowie Gruppenausflügen von Walter Kreis nach Grenoble, Arles, Lyon und Strassburg und ins Wallis. Die Reisen sind mit Ortsangabe und Datum handschriftlich betitelt. Das Album gehörte sehr wahrscheinlich Walter Kreis und ein Grossteil der Fotografien wurden von ihm hergestellt. Die Fotografien wurden mit doppelseitigen, dreieckigen Fotoklebern montiert. Das letzte Albumdrittel wurde leer gelassen. Kleine Etikette im hinteren Buchdeckel unten rechts “Papyrus Basel AG Basel”. Das Album und die enthaltenen Fotografien wurden gereinigt und restauriert."
+        ]
+      }
     }
   ],
   "summary": {
     "en": [
-      "A very nice album of the SGV_10 Familie Kreis Collection"
+      "A photo album of the SGV_10 Familie Kreis collection, digitised within the Participatory Knowledge Practices in Analogue and Digital Image Archives (PIA) research project"
     ]
   },
   "requiredStatement": {
@@ -136,6 +160,13 @@
                 "type": "Image",
                 "height": 2730,
                 "width": 3662,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_001.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p1"
@@ -168,6 +199,13 @@
                 "type": "Image",
                 "height": 2729,
                 "width": 3663,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_001_mit_Kordel.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p2"
@@ -200,6 +238,13 @@
                 "type": "Image",
                 "height": 2655,
                 "width": 3765,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_002.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p3"
@@ -232,6 +277,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_003.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p4"
@@ -264,6 +316,13 @@
                 "type": "Image",
                 "height": 2702,
                 "width": 3700,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_003_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p5"
@@ -296,6 +355,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_004.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p6"
@@ -328,6 +394,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_005.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p7"
@@ -360,6 +433,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_005_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p8"
@@ -392,6 +472,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_005_mit_Zusatz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p9"
@@ -424,6 +511,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_005_mit_Zusatz_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p10"
@@ -456,6 +550,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_006.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p11"
@@ -488,6 +589,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_007.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p12"
@@ -520,6 +628,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_007_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p13"
@@ -552,6 +667,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_008.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p14"
@@ -584,6 +706,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_009.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p15"
@@ -616,6 +745,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_009_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p16"
@@ -648,6 +784,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_010.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p17"
@@ -680,6 +823,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_011.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p18"
@@ -712,6 +862,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_011_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p19"
@@ -744,6 +901,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_012.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p20"
@@ -776,6 +940,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_013.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p21"
@@ -808,6 +979,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_013_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p22"
@@ -840,6 +1018,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_014.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p23"
@@ -872,6 +1057,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_015.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p24"
@@ -904,6 +1096,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_015_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p25"
@@ -936,6 +1135,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_016.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p26"
@@ -968,6 +1174,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_017.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p27"
@@ -1000,6 +1213,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_017_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p28"
@@ -1032,6 +1252,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_018.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p29"
@@ -1064,6 +1291,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_019.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p30"
@@ -1096,6 +1330,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_019_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p31"
@@ -1128,6 +1369,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_020.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p32"
@@ -1160,6 +1408,13 @@
                 "type": "Image",
                 "height": 2697,
                 "width": 3707,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_021.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p33"
@@ -1192,6 +1447,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_021_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p34"
@@ -1224,6 +1486,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_022.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p35"
@@ -1256,6 +1525,13 @@
                 "type": "Image",
                 "height": 2702,
                 "width": 3700,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_023.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p36"
@@ -1288,6 +1564,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_023_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p37"
@@ -1320,6 +1603,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_024.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p38"
@@ -1352,6 +1642,13 @@
                 "type": "Image",
                 "height": 2699,
                 "width": 3703,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_025.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p39"
@@ -1384,6 +1681,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_025_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p40"
@@ -1416,6 +1720,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_026.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p41"
@@ -1448,6 +1759,13 @@
                 "type": "Image",
                 "height": 2704,
                 "width": 3697,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_027.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p42"
@@ -1480,6 +1798,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_027_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p43"
@@ -1512,6 +1837,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_028.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p44"
@@ -1544,6 +1876,13 @@
                 "type": "Image",
                 "height": 2702,
                 "width": 3700,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_029.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p45"
@@ -1572,6 +1911,13 @@
               "body": {
                 "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_029_mit_Schutz.tif/full/max/0/default.jpg",
                 "type": "Image",
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_029_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p46"
@@ -1604,6 +1950,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_030.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p47"
@@ -1636,6 +1989,13 @@
                 "type": "Image",
                 "height": 2703,
                 "width": 3698,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_031.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p48"
@@ -1668,6 +2028,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_031_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p49"
@@ -1700,6 +2067,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_032.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p50"
@@ -1732,6 +2106,13 @@
                 "type": "Image",
                 "height": 2700,
                 "width": 3702,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_033.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p51"
@@ -1764,6 +2145,13 @@
                 "type": "Image",
                 "height": 2703,
                 "width": 3699,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_033_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p52"
@@ -1796,6 +2184,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_034.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p53"
@@ -1828,6 +2223,13 @@
                 "type": "Image",
                 "height": 2697,
                 "width": 3707,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_035.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p54"
@@ -1860,6 +2262,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_035_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p55"
@@ -1892,6 +2301,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_036.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p56"
@@ -1924,6 +2340,13 @@
                 "type": "Image",
                 "height": 2698,
                 "width": 3706,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_037.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p57"
@@ -1956,6 +2379,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_037_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p58"
@@ -1988,6 +2418,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_038.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p59"
@@ -2016,6 +2453,13 @@
               "body": {
                 "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_039.tif/full/max/0/default.jpg",
                 "type": "Image",
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_039.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p60"
@@ -2048,6 +2492,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_039_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p61"
@@ -2080,6 +2531,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_040.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p62"
@@ -2112,6 +2570,13 @@
                 "type": "Image",
                 "height": 2703,
                 "width": 3699,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_041.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p63"
@@ -2144,6 +2609,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_041_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p64"
@@ -2176,6 +2648,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_042.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p65"
@@ -2208,6 +2687,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_043_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p66"
@@ -2240,6 +2726,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_044.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p67"
@@ -2272,6 +2765,13 @@
                 "type": "Image",
                 "height": 2705,
                 "width": 3695,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_045.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p68"
@@ -2304,6 +2804,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_045_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p69"
@@ -2336,6 +2843,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_046.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p70"
@@ -2368,6 +2882,13 @@
                 "type": "Image",
                 "height": 2701,
                 "width": 3701,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_047.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p71"
@@ -2400,6 +2921,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_047_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p72"
@@ -2432,6 +2960,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_048.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p73"
@@ -2464,6 +2999,13 @@
                 "type": "Image",
                 "height": 2704,
                 "width": 3697,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_049.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p74"
@@ -2496,6 +3038,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_049_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p75"
@@ -2528,6 +3077,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_050.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p76"
@@ -2560,6 +3116,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_051.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p77"
@@ -2592,6 +3155,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_051_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p78"
@@ -2624,6 +3194,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_052.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p79"
@@ -2656,6 +3233,13 @@
                 "type": "Image",
                 "height": 2697,
                 "width": 3707,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_053.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p80"
@@ -2688,6 +3272,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_053_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p81"
@@ -2720,6 +3311,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_054.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p82"
@@ -2752,6 +3350,13 @@
                 "type": "Image",
                 "height": 2700,
                 "width": 3702,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_055.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p83"
@@ -2780,6 +3385,13 @@
               "body": {
                 "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_055_mit_Schutz.tif/full/max/0/default.jpg",
                 "type": "Image",
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_055_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p84"
@@ -2812,6 +3424,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_056.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p85"
@@ -2844,6 +3463,13 @@
                 "type": "Image",
                 "height": 2705,
                 "width": 3695,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_057.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p86"
@@ -2876,6 +3502,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_057_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p87"
@@ -2908,6 +3541,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_058.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p88"
@@ -2940,6 +3580,13 @@
                 "type": "Image",
                 "height": 2699,
                 "width": 3704,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_059.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p89"
@@ -2972,6 +3619,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_059_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p90"
@@ -3004,6 +3658,13 @@
                 "type": "Image",
                 "height": 2705,
                 "width": 3696,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_060.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p91"
@@ -3036,6 +3697,13 @@
                 "type": "Image",
                 "height": 2704,
                 "width": 3696,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_061.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p92"
@@ -3068,6 +3736,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_061_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p93"
@@ -3100,6 +3775,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_062.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p94"
@@ -3132,6 +3814,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_063.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p95"
@@ -3164,6 +3853,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_063_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p96"
@@ -3196,6 +3892,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_064.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p97"
@@ -3228,6 +3931,13 @@
                 "type": "Image",
                 "height": 2701,
                 "width": 3702,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_065.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p98"
@@ -3260,6 +3970,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_065_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p99"
@@ -3292,6 +4009,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_066.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p100"
@@ -3324,6 +4048,13 @@
                 "type": "Image",
                 "height": 2704,
                 "width": 3697,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_067.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p101"
@@ -3356,6 +4087,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_067_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p102"
@@ -3388,6 +4126,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_068.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p103"
@@ -3420,6 +4165,13 @@
                 "type": "Image",
                 "height": 2702,
                 "width": 3700,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_069.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p104"
@@ -3452,6 +4204,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_069_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p105"
@@ -3484,6 +4243,13 @@
                 "type": "Image",
                 "height": 2702,
                 "width": 3700,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_070.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p106"
@@ -3516,6 +4282,13 @@
                 "type": "Image",
                 "height": 2701,
                 "width": 3702,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_071.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p107"
@@ -3548,6 +4321,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_071_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p108"
@@ -3580,6 +4360,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_072.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p109"
@@ -3612,6 +4399,13 @@
                 "type": "Image",
                 "height": 2697,
                 "width": 3707,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_073.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p110"
@@ -3644,6 +4438,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_073_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p111"
@@ -3676,6 +4477,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_074.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p112"
@@ -3708,6 +4516,13 @@
                 "type": "Image",
                 "height": 2692,
                 "width": 3713,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_075.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p113"
@@ -3740,6 +4555,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_075_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p114"
@@ -3772,6 +4594,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_076.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p115"
@@ -3804,6 +4633,13 @@
                 "type": "Image",
                 "height": 2702,
                 "width": 3700,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_077.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p116"
@@ -3836,6 +4672,13 @@
                 "type": "Image",
                 "height": 2699,
                 "width": 3704,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_077_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p117"
@@ -3868,6 +4711,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_078.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p118"
@@ -3900,6 +4750,13 @@
                 "type": "Image",
                 "height": 2697,
                 "width": 3706,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_079.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p119"
@@ -3932,6 +4789,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_080.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p120"
@@ -3964,6 +4828,13 @@
                 "type": "Image",
                 "height": 2705,
                 "width": 3696,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_081.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p121"
@@ -3996,6 +4867,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_081_mit_Schutz.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p122"
@@ -4028,6 +4906,13 @@
                 "type": "Image",
                 "height": 2707,
                 "width": 3694,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_082.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p123"
@@ -4060,6 +4945,13 @@
                 "type": "Image",
                 "height": 2582,
                 "width": 3872,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_083.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p124"
@@ -4092,6 +4984,13 @@
                 "type": "Image",
                 "height": 2730,
                 "width": 3662,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_084.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p125"
@@ -4124,6 +5023,13 @@
                 "type": "Image",
                 "height": 2729,
                 "width": 3663,
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_084_mit_Kordel.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p126"
@@ -4152,6 +5058,13 @@
               "body": {
                 "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_09861_r.tif/full/max/0/default.jpg",
                 "type": "Image",
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_09861_r.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p127"
@@ -4180,6 +5093,13 @@
               "body": {
                 "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_09861_v.tif/full/max/0/default.jpg",
                 "type": "Image",
+                "service": [
+                  {
+                    "id": "https://sipi.participatory-archives.ch/iiif/3/SGV_10A_00031_09861_v.tif",
+                    "type": "ImageService3",
+                    "profile": "level2"
+                  }
+                ],
                 "format": "image/jpeg"
               },
               "target": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031/canvas/p128"
