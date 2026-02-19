@@ -8,7 +8,7 @@ from iiif_prezi3 import config, Manifest, KeyValueString, ResourceItem, Provider
 album_id = "SGV_10A_00031"
 title = "[Gebundenes Album mit blauem Textileinband zu einer Familienreise nach Norditalien und Gruppenreisen nach Frankreich]" ## [Gebundenes Album mit Rosenmuster mit Fotografien eines Patenkindes]
 description = "Grossformatiges Album in Kordelbindung im Querformat. Blauer Textileinband mit Lochung aber ohne erhaltene Kordel. Hellgrau marmoriertes Vorsatzpapier, ein Leinengewebe verstärkt den Buchrücken. 40 dunkelgraue Albumseiten mit Pergamin-Schutzblättern mit jeweils sechs oder mehr Silbergelatine-Abzügen DOP pro Seite. Das Album zeigt die Familie Kreis auf einer Norditalienreise 1927 durch Mailand, Venedig, Pisa und Florenz sowie Gruppenausflügen von Walter Kreis nach Grenoble, Arles, Lyon und Strassburg und ins Wallis. Die Reisen sind mit Ortsangabe und Datum handschriftlich betitelt. Das Album gehörte sehr wahrscheinlich Walter Kreis und ein Grossteil der Fotografien wurden von ihm hergestellt. Die Fotografien wurden mit doppelseitigen, dreieckigen Fotoklebern montiert. Das letzte Albumdrittel wurde leer gelassen. Kleine Etikette im hinteren Buchdeckel unten rechts “Papyrus Basel AG Basel”. Das Album und die enthaltenen Fotografien wurden gereinigt und restauriert."
-year = "1926" ## 1949
+period = "1926-1928" ## 1949
 collection_name = "SGV_10 Familie Kreis"
 summary = "A photo album of the SGV_10 Familie Kreis collection, digitised within the Participatory Knowledge Practices in Analogue and Digital Image Archives (PIA) research project"
 rights = "http://creativecommons.org/licenses/by-nc/4.0/"
@@ -71,7 +71,7 @@ def setup_manifest(manifest_id, behavior):
         KeyValueString(label="Title", value=title),
         KeyValueString(label="Collection", value=collection_name),
         KeyValueString(label="Identifier", value=album_id),
-        KeyValueString(label="Year", value=year),
+        KeyValueString(label="Year/Period", value=period),
         KeyValueString(label="Description", value=description),
     ]
     l = ResourceItem(id=caslogo,type="Image",format="image/svg+xml")
