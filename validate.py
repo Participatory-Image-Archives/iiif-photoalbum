@@ -71,7 +71,8 @@ def image_urls(manifest):
 
 def answers(url):
     try:
-        r = http.get(url, timeout=60, stream=True)
+        # Short connect timeout: unreachable hosts (e.g. the VPN only PIA server) fail fast
+        r = http.get(url, timeout=(5, 60), stream=True)
         r.close()
         return url, r.status_code
     except Exception as e:
