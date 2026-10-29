@@ -1,6 +1,7 @@
 import argparse
 import json
 import math
+import os
 import re
 import sys
 import requests
@@ -36,6 +37,27 @@ manifests_to_generate = [
 
 ### IIIF Presentation server (Manifest ids must not change, they are cited)
 manifestserver = "https://julsraemy.ch/hostiiing/manifests"
+collectionserver = "https://julsraemy.ch/hostiiing/collections"
+
+### Removable notice while the Manifests are rebuilt: set enabled to False and
+### rerun to remove it from the Manifests and the Collections
+status_note = {"enabled": True, "built": "2026-10-29"}
+
+def status_text(served, total, layers=False, short=False):
+    """Under construction notice, with the image coverage of this run."""
+    if short:
+        text = ("Under construction. Images are currently served by Memobase (Memoriav); "
+                "the page variants and the pages without photographs await the original files from the EKWS.")
+    else:
+        text = ("Under construction. The images of this Manifest are currently served by Memobase (Memoriav), "
+                "which holds only the default capture of pages with photographs. The page variants "
+                "(with and without protective interleaf, loose photographs, cord binding) and the pages "
+                "without photographs are awaiting delivery of the original files from the EKWS and do not "
+                "display yet.")
+    text += f" Image coverage: {served} of {total} images."
+    if layers:
+        text += " The Choice layers are in place, but their variant images do not display yet."
+    return text
 
 ### IIIF Image sources, tried in order for each file stem: the first source
 ### whose info.json answers with HTTP 200 wins. A source is skipped when it is
@@ -177,12 +199,12 @@ def make_body(stem, label=None):
     body.service = [make_service(image["service"], image["source"]["api"])]
     return body
 
-def setup_manifest(album_id, manifest_id, behavior, label, first_stem, sources_used):
+def setup_manifest(album_id, manifest_id, behavior, label, first_stem, sources_used, note=None):
     """Create a manifest with shared metadata, provider, rights, thumbnail."""
     album = albums[album_id]
     manifest = Manifest(id=manifestserver+"/"+manifest_id+extension,
                         label=f"Album {album_id} ({label})")
-    manifest.summary = summary
+    manifest.summary = {"en": [summary, note]} if note else summary
     manifest.metadata = [
         KeyValueString(label="Title", value=album["title"]),
         KeyValueString(label="Collection", value=collection_name),
@@ -191,6 +213,9 @@ def setup_manifest(album_id, manifest_id, behavior, label, first_stem, sources_u
     ]
     if album["description"]:
         manifest.metadata.append(KeyValueString(label="Description", value=album["description"]))
+    if note:
+        manifest.metadata.append(KeyValueString(label="Status",
+                                                value=f"Under construction (rebuilt {status_note['built']})"))
     l = ResourceItem(id=caslogo,type="Image",format="image/svg+xml")
     hcas = HomepageItem(id=cas,type="Text",format="text/html",label="EKWS Fotoarchiv")
     p = ProviderItem(id=gnd, label="Empirische Kulturwissenschaft Schweiz. Fotoarchiv",homepage=[hcas],logo=[l])
@@ -307,7 +332,11 @@ def build_album(album_id, recorded):
     first_stem = served[0] if served else stems[0]
     for manifest_id, behavior, label, canvases in plans:
         sources_used = {image_cache[s]["source"]["name"] for c in canvases for s in c[2]}
-        manifest = setup_manifest(album_id, manifest_id, behavior, label, first_stem, sources_used)
+        images = [s for c in canvases for s in c[2]]
+        note = None
+        if status_note["enabled"]:
+            note = status_text(sum(s not in pending for s in images), len(images), layers=label == "Layers")
+        manifest = setup_manifest(album_id, manifest_id, behavior, label, first_stem, sources_used, note)
         for n, canvas_label, canvas_stems in canvases:
             add_canvas(manifest, manifest_id, n, canvas_label, canvas_stems)
         write_manifest(manifest, album_id, manifest_id)
@@ -320,7 +349,25 @@ def build_album(album_id, recorded):
             none = [c for c in layered if all(s in pending for s in c[2])]
             print(f"  Pages with variants: {len(layered)}; all states served: {len(full)}, "
                   f"default served and variants pending: {len(partial)}, all pending: {len(none)}")
+    write_collection(album_id, len(stems) - len(pending), len(stems))
     return True
+
+def write_collection(album_id, served, total):
+    """Add or remove the notice in the published Collection, written to collections/ for upload."""
+    collection_id = f"{collectionserver}/{album_id}{extension}"
+    collection = http.get(collection_id, timeout=30).json()
+    if status_note["enabled"]:
+        collection["summary"] = {"en": [status_text(served, total, short=True)]}
+    elif collection.get("summary", {}).get("en", [""])[0].startswith("Under construction"):
+        del collection["summary"]
+    # Keep summary after label, as in the Manifests
+    collection = {k: collection[k] for k in ["@context", "id", "type", "label", "summary"] if k in collection} | collection
+    os.makedirs("collections", exist_ok=True)
+    output_path = f"collections/{album_id}{extension}"
+    with open(output_path, "w") as output:
+        json.dump(collection, output, indent=2, ensure_ascii=False)
+        output.write("\n")
+    print(f"Collection written to {output_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate IIIF Presentation 3.0 Manifests for the SGV_10 photo albums.")
