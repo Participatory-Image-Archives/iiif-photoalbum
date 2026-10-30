@@ -1,11 +1,42 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
+type: software
+title: "iiif-photoalbum"
+abstract: >-
+  Generates IIIF Presentation API 3.0 Manifests and Collections for photo
+  albums digitised in layers (pages with and without protective interleaf,
+  inserts, cords, loose photographs). Curators list the images of an album in
+  a spreadsheet, pointing to images already served by a IIIF image server or
+  as plain files; the tool measures the images, groups them into pages with
+  switchable layers, warns about layers whose size or shape differ, validates
+  the result and writes static JSON files that can be published on GitHub
+  Pages or any web server. The photo albums SGV_10A_00031 and SGV_10A_00050 of
+  the SGV_10 Kreis Family Collection serve as examples.
 authors:
 - family-names: "Raemy"
   given-names: "Julien Antoine"
   orcid: "https://orcid.org/0000-0002-4711-5759"
-title: "iiif-photoalbum"
-version: 0.2.0
-doi: 
-date-released: 2026-02-11
-url: "https://github.com/participatory-Image-Archives/iiif-photoalbum"
+version: 0.9.0
+date-released: 2026-10-30
+license: Apache-2.0
+repository-code: "https://github.com/Participatory-Image-Archives/iiif-photoalbum"
+url: "https://github.com/Participatory-Image-Archives/iiif-photoalbum"
+keywords:
+  - IIIF
+  - IIIF Presentation API
+  - photo albums
+  - layered digitisation
+  - cultural heritage
+  - digital humanities
+  - GitHub Pages
+references:
+  - type: standard
+    title: "IIIF Presentation API 3.0"
+    authors:
+      - name: "International Image Interoperability Framework (IIIF) Consortium"
+    url: "https://iiif.io/api/presentation/3.0/"
+  - type: standard
+    title: "IIIF Image API 3.0"
+    authors:
+      - name: "International Image Interoperability Framework (IIIF) Consortium"
+    url: "https://iiif.io/api/image/3.0/"
