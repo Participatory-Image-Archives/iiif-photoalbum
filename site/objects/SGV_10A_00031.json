@@ -1,0 +1,99 @@
+{
+  "@context": "https://linked.art/ns/v1/linked-art.json",
+  "id": "https://julsraemy.ch/hostiiing/objects/SGV_10A_00031.json",
+  "type": "HumanMadeObject",
+  "_label": "Album 31 (SGV_10A_00031)",
+  "identified_by": [
+    {
+      "type": "Name",
+      "content": "Album 31 (SGV_10A_00031)"
+    },
+    {
+      "type": "Identifier",
+      "content": "SGV_10A_00031"
+    }
+  ],
+  "classified_as": [
+    {
+      "id": "http://vocab.getty.edu/aat/300026695",
+      "type": "Type",
+      "_label": "photo album"
+    }
+  ],
+  "produced_by": {
+    "type": "Production",
+    "timespan": {
+      "type": "TimeSpan",
+      "begin_of_the_begin": "1926-01-01T00:00:00Z",
+      "end_of_the_end": "1928-12-31T23:59:59Z"
+    }
+  },
+  "subject_of": [
+    {
+      "type": "LinguisticObject",
+      "_label": "IIIF Manifest (Individuals)",
+      "digitally_carried_by": [
+        {
+          "type": "DigitalObject",
+          "access_point": [
+            {
+              "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031.json",
+              "type": "DigitalObject"
+            }
+          ],
+          "conforms_to": [
+            {
+              "id": "http://iiif.io/api/presentation/",
+              "type": "InformationObject"
+            }
+          ],
+          "format": "application/ld+json;profile=\"http://iiif.io/api/presentation/3/context.json\""
+        }
+      ]
+    },
+    {
+      "type": "LinguisticObject",
+      "_label": "IIIF Manifest (Paged)",
+      "digitally_carried_by": [
+        {
+          "type": "DigitalObject",
+          "access_point": [
+            {
+              "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_paged.json",
+              "type": "DigitalObject"
+            }
+          ],
+          "conforms_to": [
+            {
+              "id": "http://iiif.io/api/presentation/",
+              "type": "InformationObject"
+            }
+          ],
+          "format": "application/ld+json;profile=\"http://iiif.io/api/presentation/3/context.json\""
+        }
+      ]
+    },
+    {
+      "type": "LinguisticObject",
+      "_label": "IIIF Manifest (Layers)",
+      "digitally_carried_by": [
+        {
+          "type": "DigitalObject",
+          "access_point": [
+            {
+              "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers.json",
+              "type": "DigitalObject"
+            }
+          ],
+          "conforms_to": [
+            {
+              "id": "http://iiif.io/api/presentation/",
+              "type": "InformationObject"
+            }
+          ],
+          "format": "application/ld+json;profile=\"http://iiif.io/api/presentation/3/context.json\""
+        }
+      ]
+    }
+  ]
+}

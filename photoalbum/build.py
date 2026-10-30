@@ -1,4 +1,5 @@
 """Turn albums into Manifests and Collections, and report what needs attention."""
+import datetime
 import html
 import json
 import os
@@ -7,12 +8,13 @@ from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
-from iiif_prezi3 import (config, Annotation, AnnotationPage, Choice, HomepageItem, KeyValueString,
-                         Manifest, ProviderItem, ResourceItem, ServiceItem1)
+from iiif_prezi3 import (config, Annotation, AnnotationPage, Choice, ExternalItem, HomepageItem,
+                         KeyValueString, Manifest, ProviderItem, ResourceItem, ServiceItem1)
 
 from .project import is_url
 
 CONTEXT = "http://iiif.io/api/presentation/3/context.json"
+LINKED_ART_CONTEXT = "https://linked.art/ns/v1/linked-art.json"
 DEFAULT_VIEWS = [{"suffix": "", "behavior": "paged", "canvases": "layers"}]
 
 
@@ -105,6 +107,19 @@ def make_thumbnail(image):
     return thumbnail
 
 
+def timestamp(value, end=False):
+    """A produced begin or end as written in album.yml; YAML may have read it as a date.
+
+    A date alone becomes the start of that day for begin, its last second for end.
+    """
+    if isinstance(value, datetime.datetime):
+        return value.isoformat().replace("+00:00", "Z")
+    value = value.isoformat() if isinstance(value, datetime.date) else str(value)
+    if len(value) == 10:
+        value += "T23:59:59Z" if end else "T00:00:00Z"
+    return value
+
+
 def make_provider(provider):
     fields = {"id": provider["id"], "label": provider["label"]}
     if provider.get("homepage"):
@@ -119,7 +134,7 @@ def make_provider(provider):
 
 
 def first_label(resource):
-    label = resource.get("label") or {}
+    label = resource.get("label") or resource.get("_label") or {}
     values = next(iter(label.values()), [""]) if isinstance(label, dict) else [label]
     return values[0] if values else ""
 
@@ -280,6 +295,12 @@ class Builder:
             manifest.viewingDirection = s["viewing_direction"]
         manifest.behavior = [view.get("behavior", "paged")]
         manifest.thumbnail = [make_thumbnail(thumbnail)]
+        record = self.linked_art_id(album)
+        if record:
+            # A list of ExternalItem, validated as the SeeAlso of the Manifest
+            # (iiif-prezi3 1.x rejects a SeeAlso built directly)
+            manifest.seeAlso = [ExternalItem(id=record, type="Dataset", label=self.see_also(record)["label"],
+                                             format="application/ld+json", profile=LINKED_ART_CONTEXT)]
         return manifest
 
     def add_canvas(self, manifest, manifest_id, n, label, rows, size):
@@ -360,6 +381,7 @@ class Builder:
         thumbnail = cache.get(thumbnail_ref) or self.images.resolve(thumbnail_ref) or cache[refs[0]]
 
         self.manifests[album.id] = []
+        linked = []  # (Manifest id, view label) for the Linked Art record
         for view, canvases in plans:
             manifest_id = album.id + (view.get("suffix") or "")
             images = [r.image for _, rows, _ in canvases for r in rows]
@@ -385,20 +407,78 @@ class Builder:
                                         f"some served: {len(layered) - full - none}, none served: {none}")
             manifest_json = json.loads(manifest.json())
             self.manifests[album.id].append({k: manifest_json[k] for k in ["id", "type", "label", "thumbnail"]})
+            linked.append((manifest_json["id"], view.get("label")))
             self.provider = manifest_json.get("provider")
 
+        self.write_linked_art(album, linked)
         self.write_album_collection(album, len(served_refs), len(refs))
         return True
 
+    # --- Linked Art --------------------------------------------------------
+
+    def linked_art_id(self, album):
+        """Id of the album's Linked Art record: the external one if given, else the generated one."""
+        settings = album.settings.get("linked_art")
+        if not settings:
+            return None
+        settings = settings if isinstance(settings, dict) else {}
+        return settings.get("id") or f"{self.base}/objects/{album.id}.json"
+
+    def see_also(self, record):
+        return {"id": record, "type": "Dataset", "label": {self.lang: ["Linked Art description of the album"]},
+                "format": "application/ld+json", "profile": LINKED_ART_CONTEXT}
+
+    def write_linked_art(self, album, linked):
+        """Describe the album as a physical object, pointing to each of its Manifests."""
+        settings = album.settings.get("linked_art")
+        if not settings:
+            return
+        settings = settings if isinstance(settings, dict) else {}
+        if settings.get("id"):
+            self.report.add("info", f"Linked Art: seeAlso to external record {settings['id']}")
+            return
+        label = settings.get("label") or album.settings.get("label") or album.id
+        record = {"@context": LINKED_ART_CONTEXT, "id": self.linked_art_id(album),
+                  "type": "HumanMadeObject", "_label": label,
+                  "identified_by": [{"type": "Name", "content": label},
+                                    {"type": "Identifier", "content": album.id}]}
+        if settings.get("classified_as"):
+            record["classified_as"] = [{"id": t["id"], "type": "Type", "_label": t.get("label")}
+                                       if t.get("label") else {"id": t["id"], "type": "Type"}
+                                       for t in settings["classified_as"]]
+        produced = settings.get("produced") or {}
+        if produced:
+            timespan = {"type": "TimeSpan"}
+            if produced.get("begin"):
+                timespan["begin_of_the_begin"] = timestamp(produced["begin"])
+            if produced.get("end"):
+                timespan["end_of_the_end"] = timestamp(produced["end"], end=True)
+            record["produced_by"] = {"type": "Production", "timespan": timespan}
+        # Makers, places, materials and dimensions would go here (produced_by.carried_out_by,
+        # produced_by.took_place_at, made_of, dimension), once curators choose their vocabularies.
+        record["subject_of"] = [
+            {"type": "LinguisticObject", "_label": f"IIIF Manifest ({view})" if view else "IIIF Manifest",
+             "digitally_carried_by": [{
+                 "type": "DigitalObject",
+                 "access_point": [{"id": manifest_id, "type": "DigitalObject"}],
+                 "conforms_to": [{"id": "http://iiif.io/api/presentation/", "type": "InformationObject"}],
+                 "format": f'application/ld+json;profile="{CONTEXT}"'}]}
+            for manifest_id, view in linked]
+        path = os.path.join(self.output, "objects", album.id + ".json")
+        self.write_json(path, record)
+        self.report.add("info", f"Linked Art record written to {path} ({len(linked)} Manifests linked)")
+
     # --- Collections -----------------------------------------------------
 
-    def collection(self, collection_id, label, summary, items, provider):
+    def collection(self, collection_id, label, summary, items, provider, see_also=None):
         collection = {"@context": CONTEXT, "id": f"{self.base}/collections/{collection_id}.json",
                       "type": "Collection", "label": {self.lang: [label]}}
         if summary:
             collection["summary"] = {self.lang: [summary]}
         if provider:
             collection["provider"] = provider
+        if see_also:
+            collection["seeAlso"] = [see_also]
         collection["items"] = items
         path = os.path.join(self.output, "collections", collection_id + ".json")
         self.write_json(path, collection)
@@ -411,9 +491,10 @@ class Builder:
             return
         settings = settings if isinstance(settings, dict) else {}
         summary = self.notice(album.settings, "collection", served, total) or settings.get("summary")
+        record = self.linked_art_id(album)
         self.collections[album.id] = self.collection(
             album.id, settings.get("label") or album.settings.get("label") or album.id, summary,
-            self.manifests[album.id], self.provider)
+            self.manifests[album.id], self.provider, self.see_also(record) if record else None)
 
     def write_project_collection(self):
         settings = self.project.get("collection")
@@ -431,21 +512,25 @@ class Builder:
     def write_index(self):
         """List everything in the output folder, with links to open it in viewers."""
         entries = []
-        for kind in ["collections", "manifests"]:
+        for kind in ["collections", "manifests", "objects"]:
             folder = os.path.join(self.output, kind)
             for name in sorted(os.listdir(folder)) if os.path.isdir(folder) else []:
                 if name.endswith(".json"):
                     with open(os.path.join(folder, name), encoding="utf-8") as f:
                         resource = json.load(f)
                     entries.append((kind, f"{kind}/{name}", resource["id"], first_label(resource)))
-        rows = "\n".join(
-            f'<tr><td>{kind[:-1].title()}</td><td>{html.escape(label)}</td>'
-            f'<td><a href="{html.escape(path)}">JSON</a></td>'
-            f'<td><a href="https://projectmirador.org/embed/?iiif-content={html.escape(rid)}">Mirador</a></td>'
-            f'<td><a href="https://theseusviewer.org/?iiif-content={html.escape(rid)}">Theseus</a></td>'
-            f'<td><a href="https://presentation-validator.iiif.io/validate?version=3.0&amp;url={html.escape(rid)}">'
-            f'Validator</a></td></tr>'
-            for kind, path, rid, label in entries)
+        def row(kind, path, rid, label):
+            name = "Linked Art" if kind == "objects" else kind[:-1].title()
+            cells = f'<td>{name}</td><td>{html.escape(label)}</td><td><a href="{html.escape(path)}">JSON</a></td>'
+            if kind == "objects":
+                # Linked Art records are not IIIF: no viewer or IIIF validator
+                return f"<tr>{cells}</tr>"
+            return (f'<tr>{cells}'
+                    f'<td><a href="https://projectmirador.org/embed/?iiif-content={html.escape(rid)}">Mirador</a></td>'
+                    f'<td><a href="https://theseusviewer.org/?iiif-content={html.escape(rid)}">Theseus</a></td>'
+                    f'<td><a href="https://presentation-validator.iiif.io/validate?version=3.0&amp;url={html.escape(rid)}">'
+                    f'Validator</a></td></tr>')
+        rows = "\n".join(row(*entry) for entry in entries)
         page = f"""<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="utf-8"><title>IIIF Manifests</title>

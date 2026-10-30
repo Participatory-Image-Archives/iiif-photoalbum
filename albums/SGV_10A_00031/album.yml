@@ -23,3 +23,14 @@ metadata:
 # {base_url}/collections/SGV_10A_00031.json
 collection:
   label: IIIF Collection of the SGV_10A_00031 Photo Album
+
+# Linked Art record of the album, published at
+# {base_url}/objects/SGV_10A_00031.json and linked from its Manifests
+linked_art:
+  label: Album 31 (SGV_10A_00031)
+  classified_as:
+    - id: http://vocab.getty.edu/aat/300026695
+      label: photo album
+  produced:
+    begin: "1926-01-01T00:00:00Z"
+    end: "1928-12-31T23:59:59Z"

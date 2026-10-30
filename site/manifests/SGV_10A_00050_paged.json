@@ -119,6 +119,19 @@
       ]
     }
   ],
+  "seeAlso": [
+    {
+      "id": "https://julsraemy.ch/hostiiing/objects/SGV_10A_00050.json",
+      "type": "Dataset",
+      "label": {
+        "en": [
+          "Linked Art description of the album"
+        ]
+      },
+      "format": "application/ld+json",
+      "profile": "https://linked.art/ns/v1/linked-art.json"
+    }
+  ],
   "thumbnail": [
     {
       "id": "https://media.memobase.ch/iiif/sgv-002-SGV_10A_00050_001-1/open/iiif/2/sgv-002-SGV_10A_00050_001-1.jpg/full/80,/0/default.jpg",

@@ -35,6 +35,7 @@ flowchart LR
     subgraph site["site/"]
         manifests["manifests/*.json"]
         collections["collections/*.json"]
+        objects["objects/*.json<br/>Linked Art records"]
         index["index.html"]
     end
 
@@ -45,7 +46,7 @@ flowchart LR
     iiif & files -. sizes .-> resolve
     resolve --> check --> generate
     check --> report
-    generate --> manifests & collections & index
+    generate --> manifests & collections & objects & index
     site --> validate
     site --> publish --> viewer
     iiif & files -. images .-> viewer
@@ -62,6 +63,7 @@ albums/
 site/                        generated, laid out as published
   manifests/SGV_10A_00031_layers.json
   collections/SGV_10A_00031.json
+  objects/SGV_10A_00031.json   Linked Art record of the album (optional)
   index.html                 list of everything, with links to viewers
 build-report.md              generated: what needs attention
 ```
@@ -149,6 +151,29 @@ Both thresholds are set under `checks` in `project.yml`. The build also warns wh
 - **Per album**: add a `collection` entry to `album.yml`. The Collection `collections/{album}.json` lists the Manifests of the album.
 - **For the whole project**: uncomment `collection` in `project.yml`, with an `id` and a `label`. It lists the Collection of each album that has one, otherwise the album's Manifests. It is only rewritten when all albums are built, so that a failing album does not drop out of it.
 
+## Linked Art
+
+A Manifest describes how an album is presented; a [Linked Art](https://linked.art/) record describes what the album is, as a physical object. For each album with a `linked_art` entry in its `album.yml`, the build writes a small record to `objects/{album}.json`, published as `{base_url}/objects/{album}.json`:
+
+```yaml
+linked_art:
+  label: Album 31 (SGV_10A_00031)          # default: the album label
+  classified_as:                           # Getty AAT terms
+    - id: http://vocab.getty.edu/aat/300026695
+      label: photo album
+  produced:                                # optional; a date alone is read as a whole day
+    begin: "1926-01-01T00:00:00Z"
+    end: "1928-12-31T23:59:59Z"
+  # id: https://example.org/object/...     # optional: use an existing record instead
+```
+
+- The record is a `HumanMadeObject` with the label as `Name`, the album id as `Identifier`, the `classified_as` types and, if given, a `produced_by` time span.
+- It lists every Manifest of the album under `subject_of`, following the [Linked Art pattern for IIIF Manifests](https://linked.art/model/digital/).
+- Every Manifest of the album, and its Collection, link back to the record with a `seeAlso` (`type: Dataset`, `format: application/ld+json`, Linked Art profile).
+- With `id`, no record is written: the `seeAlso` points to that existing record, e.g. one published by the archive.
+
+Makers, places, materials and dimensions are left out: they need vocabulary choices by the curators. They would go in `produced_by` (`carried_out_by`, `took_place_at`), `made_of` and `dimension`. Without `linked_art`, nothing changes in the Manifests.
+
 ## Image sources
 
 Images given by file name are looked up on the `image_sources` of `project.yml`, in order; the first one whose `info.json` answers is used. In a source's `service`, `{name}` is the file name without extension and `{file}` the file name; `rewrite` adapts the name to one source. Images given by URL are used as given.
@@ -181,11 +206,12 @@ python validate.py --url                 # check the published versions
 
 On Python 3.12 and later, `iiif-prezi3` 1.x pins a Pillow version that has no wheel and fails to build. Use Python 3.11, or install a recent Pillow wheel first and then `pip install --no-deps "iiif-prezi3<2" "pydantic<2" requests jsonschema PyYAML`.
 
-`validate.py` runs three separate checks, because the IIIF Presentation validator checks schema conformance only:
+`validate.py` runs four separate checks, because the IIIF Presentation validator checks schema conformance only:
 
 1. Schema: the [IIIF Presentation validator](https://presentation-validator.iiif.io/) (target `okay: 1`). Local files are posted to it; files larger than its request limit are checked against the validator's JSON Schema locally.
 2. Images: every image body, thumbnail and service `info.json` answers with HTTP 200 and sends a CORS header. With `--images-warn`, images that do not answer are listed without failing (useful while images are pending).
 3. Collections: every item of the Collections is among the generated files.
+4. Linked Art: every record in `objects/` has the Linked Art `@context` and points only to generated Manifests, and every `seeAlso` to `{base_url}/objects/` has its record. This check uses local files only.
 
 Whether the chosen layers are meaningful is not checked automatically.
 
@@ -230,18 +256,18 @@ These gaps are expected to close once the EKWS files are served through `self_ho
 
 If you use this software, please cite it as below (see also [CITATION.cff](CITATION.cff)):
 
-> Raemy, J. A. (2026). *iiif-photoalbum* (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23794321
+> Raemy, J. A. (2026). *iiif-photoalbum* (Version 1.1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23794320
 
 ```bibtex
 @software{raemy_iiif_photoalbum_2026,
   author    = {Raemy, Julien Antoine},
   title     = {iiif-photoalbum},
-  version   = {1.0.0},
+  version   = {1.1.0},
   year      = {2026},
   publisher = {Zenodo},
-  doi       = {10.5281/zenodo.23794321},
-  url       = {https://doi.org/10.5281/zenodo.23794321}
+  doi       = {10.5281/zenodo.23794320},
+  url       = {https://doi.org/10.5281/zenodo.23794320}
 }
 ```
 
-To cite all versions rather than this one, use https://doi.org/10.5281/zenodo.23794320.
+This DOI always leads to the latest version. The DOI of each version is listed on [Zenodo](https://doi.org/10.5281/zenodo.23794320); version 1.0.0 is https://doi.org/10.5281/zenodo.23794321.

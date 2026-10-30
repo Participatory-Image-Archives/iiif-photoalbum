@@ -13,3 +13,13 @@ metadata:
 # {base_url}/collections/SGV_10A_00050.json
 collection:
   label: IIIF Collection of the SGV_10A_00050 Photo Album
+
+# Linked Art record of the album, published at
+# {base_url}/objects/SGV_10A_00050.json and linked from its Manifests
+linked_art:
+  classified_as:
+    - id: http://vocab.getty.edu/aat/300026695
+      label: photo album
+  produced:
+    begin: "1949-01-01T00:00:00Z"
+    end: "1949-12-31T23:59:59Z"

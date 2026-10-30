@@ -16,15 +16,17 @@ authors:
 - family-names: "Raemy"
   given-names: "Julien Antoine"
   orcid: "https://orcid.org/0000-0002-4711-5759"
-version: 1.0.0
-doi: 10.5281/zenodo.23794321
+version: 1.1.0
+# The all-versions DOI: it always resolves to the latest release, so it does
+# not need updating when Zenodo archives a new version
+doi: 10.5281/zenodo.23794320
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.23794321
-    description: "This version (1.0.0)"
-  - type: doi
     value: 10.5281/zenodo.23794320
-    description: "All versions"
+    description: "All versions (resolves to the latest)"
+  - type: doi
+    value: 10.5281/zenodo.23794321
+    description: "Version 1.0.0"
 date-released: 2026-10-30
 license: Apache-2.0
 repository-code: "https://github.com/Participatory-Image-Archives/iiif-photoalbum"

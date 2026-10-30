@@ -113,6 +113,21 @@ notice:
     the page variants and the pages without photographs await the original files from the EKWS.
     Image coverage: {served} of {total} images.
 
+# Optional Linked Art record of an album, describing the album as a physical
+# object; set it in the album.yml of each album that wants one. It is written
+# to objects/{album id}.json, lists every Manifest of the album (subject_of),
+# and each Manifest (and the album's Collection) links to it with seeAlso.
+# With id, no record is written: seeAlso points to that existing record.
+# linked_art:
+#   label: Album 31 (SGV_10A_00031)          # default: the album label
+#   classified_as:                           # Getty AAT terms
+#     - id: http://vocab.getty.edu/aat/300026695
+#       label: photo album
+#   produced:                                # optional
+#     begin: "1926-01-01T00:00:00Z"
+#     end: "1928-12-31T23:59:59Z"
+#   # id: https://example.org/object/...     # optional: use an existing record instead
+
 # Optional Collection of all albums, written to collections/{id}.json. It
 # lists the Collection of each album that has one, otherwise its Manifests.
 # collection:

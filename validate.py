@@ -9,6 +9,9 @@ Three separate checks, since the IIIF validator only checks the schema:
    answers, and allows other websites to load it (CORS), which viewers need.
 3. Collections: every item of the Collections is among the generated
    Manifests and Collections (with --url, the published Collections).
+4. Linked Art: every record in objects/ is JSON with the Linked Art context
+   and points only to generated Manifests, and every seeAlso of a Manifest
+   or Collection to {base_url}/objects/ has its record. Local files only.
 
 Usage: python validate.py [FILE.json ...] [--url] [--skip-images] [--images-warn]
 """
@@ -22,9 +25,10 @@ from concurrent.futures import ThreadPoolExecutor
 import requests
 
 from photoalbum.images import ORIGIN, USER_AGENT
-from photoalbum.project import load_yaml
+from photoalbum.project import load_yaml, pages_url
 
 validator = "https://presentation-validator.iiif.io/validate"
+linked_art_context = "https://linked.art/ns/v1/linked-art.json"
 schema_url = "https://raw.githubusercontent.com/IIIF/presentation-validator/main/schema/iiif_3_0.json"
 max_post = 100 * 1024  # request size limit of the public validator
 
@@ -82,6 +86,57 @@ def answers(url):
         return url, type(e).__name__, None
 
 
+def access_points(record):
+    """Ids of the Manifests a Linked Art record is the subject of."""
+    return [point["id"] for subject in record.get("subject_of", [])
+            for carrier in subject.get("digitally_carried_by", [])
+            for point in carrier.get("access_point", [])]
+
+
+def check_linked_art(output, base_url):
+    """Check the Linked Art records and the seeAlso pointing to them; return okay."""
+    ok = True
+    manifest_ids, linkers = set(), []
+    for path in sorted(glob.glob(os.path.join(output, "manifests", "*.json"))
+                       + glob.glob(os.path.join(output, "collections", "*.json"))):
+        with open(path, encoding="utf-8") as f:
+            resource = json.load(f)
+        if resource["type"] == "Manifest":
+            manifest_ids.add(resource["id"])
+        linkers.append((path, resource))
+
+    for path in sorted(glob.glob(os.path.join(output, "objects", "*.json"))):
+        try:
+            with open(path, encoding="utf-8") as f:
+                record = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"{path}: Linked Art not valid JSON ({e})")
+            ok = False
+            continue
+        if record.get("@context") != linked_art_context:
+            print(f"{path}: Linked Art @context is {record.get('@context')!r}, not {linked_art_context}")
+            ok = False
+        points = access_points(record)
+        unknown = [i for i in points if i not in manifest_ids]
+        print(f"{path}: Linked Art, {len(points) - len(unknown)}/{len(points)} Manifests generated")
+        for i in unknown:
+            print(f"  not generated: {i}")
+        ok &= not unknown
+
+    if not base_url:
+        print("Linked Art seeAlso not checked: no base_url in project.yml")
+        return ok
+    prefix = f"{base_url}/objects/"
+    for path, resource in linkers:
+        for see_also in resource.get("seeAlso", []):
+            if see_also["id"].startswith(prefix):
+                record = os.path.join(output, "objects", see_also["id"][len(prefix):])
+                if not os.path.isfile(record):
+                    print(f"{path}: seeAlso {see_also['id']} has no record in {os.path.join(output, 'objects')}")
+                    ok = False
+    return ok
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("files", nargs="*", help="Manifests and Collections (default: all in the output folder)")
@@ -91,7 +146,9 @@ def main():
     parser.add_argument("--images-warn", action="store_true",
                         help="report images that do not answer without failing (e.g. images not served yet)")
     args = parser.parse_args()
-    output = (load_yaml(args.project) if os.path.isfile(args.project) else {}).get("output", "site")
+    project = load_yaml(args.project) if os.path.isfile(args.project) else {}
+    output = project.get("output", "site")
+    base_url = (project.get("base_url") or pages_url() or "").rstrip("/")
     files = args.files or sorted(glob.glob(os.path.join(output, "manifests", "*.json"))
                                  + glob.glob(os.path.join(output, "collections", "*.json")))
 
@@ -140,6 +197,7 @@ def main():
             print(f"  not generated: {i}")
         ok &= not unknown
 
+    ok &= check_linked_art(output, base_url)
     sys.exit(0 if ok else 1)
 
 
