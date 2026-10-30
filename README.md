@@ -1,75 +1,223 @@
-# IIIF Manifests for SGV_10 Photo Albums
-The purpose of this repository is to develop a script that can generate [IIIF Presentation API 3.0](https://iiif.io/api/presentation/3.0/) resources for photo albums of the SGV_10 Kreis Family Collection.
+# IIIF Manifests for layered photo albums
 
-The photo albums that have been generated are SGV_10A_00031 and SGV_10A_00050.
+This repository turns a spreadsheet of images into [IIIF Presentation API 3.0](https://iiif.io/api/presentation/3.0/) Manifests (and, if wanted, Collections) for photo albums that were digitised in layers: the same page with and without its protective interleaf, with an insert, with its cord, and so on. In a IIIF viewer such as Mirador, the layers of a page can be switched on the same Canvas.
 
-## Script
+It does not host images. You point to images that are already online (on a IIIF image server, or as plain JPEG/PNG files); the tool finds their sizes, builds the Manifests, checks them and writes them as JSON files that can be published on GitHub Pages or any web server.
 
-`iiif-album.py` generates three Manifests per album (individuals, paged, layers) for both albums in a single run.
+The two albums of the SGV_10 Kreis Family Collection, SGV_10A_00031 and SGV_10A_00050, are the worked examples.
 
-### Image sources
+## How it works
 
-The images are no longer taken from a hard coded server. The script tries the image sources configured in `image_sources` at the top of the script, in order, for every file stem (for example `SGV_10A_00031_005_mit_Schutz`). The first source whose `info.json` answers with HTTP 200 is used.
+```mermaid
+flowchart LR
+    subgraph curator["Curator edits"]
+        project["project.yml<br/>publishing address, provider,<br/>rights, image sources, views"]
+        album["album.yml<br/>title, metadata,<br/>Collection or not"]
+        csv["images.csv<br/>images in order,<br/>grouped into pages"]
+    end
+
+    subgraph servers["Image servers (not hosted here)"]
+        iiif["IIIF image services<br/>info.json"]
+        files["JPEG / PNG files"]
+    end
+
+    subgraph build["python iiif-album.py"]
+        resolve["Find each image<br/>and measure its size"]
+        check["Check the layers of each page:<br/>shape, resolution, CORS"]
+        generate["Build Manifests<br/>(one per view)<br/>and Collections"]
+    end
+
+    validate["python validate.py<br/>schema, images, Collections"]
+    report["build-report.md<br/>what needs attention"]
+
+    subgraph site["site/"]
+        manifests["manifests/*.json"]
+        collections["collections/*.json"]
+        index["index.html"]
+    end
+
+    publish["GitHub Pages<br/>or any web server"]
+    viewer["IIIF viewer<br/>e.g. Mirador: switch layers"]
+
+    project & album & csv --> resolve
+    iiif & files -. sizes .-> resolve
+    resolve --> check --> generate
+    check --> report
+    generate --> manifests & collections & index
+    site --> validate
+    site --> publish --> viewer
+    iiif & files -. images .-> viewer
+```
+
+The files involved:
+
+```
+project.yml                  shared settings: publishing address, provider, rights, image sources
+albums/
+  SGV_10A_00031/
+    album.yml                title, description, metadata, Collection or not
+    images.csv               one line per image, in album order
+site/                        generated, laid out as published
+  manifests/SGV_10A_00031_layers.json
+  collections/SGV_10A_00031.json
+  index.html                 list of everything, with links to viewers
+build-report.md              generated: what needs attention
+```
+
+1. Describe the album in `album.yml` and list its images in `images.csv`.
+2. Run `python iiif-album.py`, or push to GitHub and let the workflow run it.
+3. Read the report: images that could not be found, sizes that were assumed, layers whose shape does not match.
+4. Publish the `site/` folder.
+
+## Adding an album
+
+```bash
+python new-album.py MY_ALBUM --images my-list.txt --layer-pattern _with_
+```
+
+`my-list.txt` lists the images of the album in order, one per line, as file names or URLs. `--layer-pattern` (optional) groups images into pages from their names: `012_with_insert.jpg` becomes a layer of `012.jpg`. The command creates `albums/MY_ALBUM/album.yml` and `images.csv`, which you then complete. You can also write both files yourself, e.g. by copying an example album.
+
+### images.csv
+
+Edit it in any spreadsheet program (comma, semicolon or tab separated, saved as UTF-8). Only `image` is required.
+
+| Column | Meaning |
+| --- | --- |
+| `image` | The image: a file name looked up on the image sources of `project.yml`, or a URL. A URL can be a IIIF image service, its `info.json`, any IIIF image request (as copied from a viewer), or a JPEG/PNG file. |
+| `page` | Images with the same `page` are the layers of one Canvas; the first one is shown by default. Empty: the image is a page of its own. |
+| `label` | Label of the Canvas (taken from the first image of the page). Empty: the file name. |
+| `layer` | Name of the layer in the viewer's layer menu. Empty: the label. |
+| `tags` | Free words, e.g. `loose` for loose photographs, used to leave images out of some Manifests. |
+
+Example, from SGV_10A_00031:
+
+```csv
+image,page,label,layer,tags
+SGV_10A_00031_005.tif,005,,005,
+SGV_10A_00031_005_mit_Schutz.tif,005,,005_mit_Schutz,
+SGV_10A_00031_005_mit_Zusatz.tif,005,,005_mit_Zusatz,
+SGV_10A_00031_09861_r.tif,09861_r,,09861_r,loose
+```
+
+The order of the lines is the order of the Canvases. Canvas ids are numbered by position (`.../canvas/p5`), so inserting or removing a line later changes what the following ids point to; the build warns when this happens to a Manifest that was already generated.
+
+### album.yml
+
+```yaml
+label: Album SGV_10A_00050
+metadata:            # label: value pairs; empty values are left out
+  Title: "[Gebundenes Album mit Rosenmuster mit Fotografien eines Patenkindes]"
+  Identifier: SGV_10A_00050
+  Year/Period: "1949"
+collection:          # leave out if no Collection is wanted
+  label: IIIF Collection of the SGV_10A_00050 Photo Album
+```
+
+Any setting of `project.yml` (summary, rights, provider, views, ...) can be repeated in `album.yml` to change it for that album only. `thumbnail` can name an image of `images.csv`; otherwise the first image served is used.
+
+## Image sizes: assumptions and warnings
+
+Curators often do not know the pixel size of the images, and do not need to. The build reads it:
+
+- from `info.json` for IIIF images (the Image API version, 2 or 3, is detected there too; `maxArea` limits of Image API 3.0 servers are applied);
+- from the first bytes of the file for JPEG/PNG images;
+- from `known_dimensions` (`recorded_dimensions.json`) for images that are not served yet.
+
+If an image cannot be measured, its body is written without a size and its Canvas takes the size of another image of the same page, or else the usual size of the album. The report says which.
+
+Each layer is compared with the first image of its page:
+
+- **Different shape** (aspect ratio differs by more than 2 %): a warning. The viewer stretches every layer to the Canvas, so this layer will look distorted when switching.
+- **Different resolution** (more than 2× larger or smaller): a note. Nothing breaks, but zooming in shows the layers with unequal sharpness.
+
+Both thresholds are set under `checks` in `project.yml`. The build also warns when an image server does not allow other websites to load its images (no CORS header), since viewers then cannot show them.
+
+## Views: which Manifests are made
+
+`views` in `project.yml` lists the Manifests made from each album. Without it, one Manifest per album shows each page with its layers. The examples make three:
+
+| Manifest | `canvases` | Content |
+| --- | --- | --- |
+| `{album}` | `images` | All scans, each image on its own Canvas (`individuals`) |
+| `{album}_paged` | `pages` | One Canvas per page with its first image, without the images tagged `loose` (`paged`) |
+| `{album}_layers` | `layers` | One Canvas per page, its images as a `Choice` of layers (`paged`) |
+
+## Collections
+
+- **Per album**: add a `collection` entry to `album.yml`. The Collection `collections/{album}.json` lists the Manifests of the album.
+- **For the whole project**: uncomment `collection` in `project.yml`, with an `id` and a `label`. It lists the Collection of each album that has one, otherwise the album's Manifests. It is only rewritten when all albums are built, so that a failing album does not drop out of it.
+
+## Image sources
+
+Images given by file name are looked up on the `image_sources` of `project.yml`, in order; the first one whose `info.json` answers is used. In a source's `service`, `{name}` is the file name without extension and `{file}` the file name; `rewrite` adapts the name to one source. Images given by URL are used as given.
+
+Images that no source serves yet keep their place at the `pending` address with their recorded size, so they display as soon as they are served there. Without `pending`, an image that cannot be found stops the build of its album and nothing is written for it.
+
+For the examples:
 
 | Source | Status | Image API | Notes |
 | --- | --- | --- | --- |
 | `memobase` | enabled | 2.x | Memobase (Memoriav) media service. `SGV_10A_00031_005` becomes `sgv-002-SGV_10A_00031_005-1`; loose photographs such as `SGV_10A_00031_09861_r` become `sgv-002-SGV_10P_09861_r-1`. Derivatives with a long side of 2400 px. |
-| `self_hosted` | disabled | 3.0 | Placeholder for the full resolution files requested from the EKWS. Set `self_hosted_base` and `enabled` once they are served. |
-| `pia_cantaloupe` | disabled | 3.0 | Legacy PIA server (`sipi.participatory-archives.ch`), reachable only via VPN since 2026. |
+| `self_hosted` | not set | 3.0 | Placeholder for the full resolution files requested from the EKWS. Set its `service` (and `pending`) once they are served. |
+| `pia_cantaloupe` | disabled | 3.0 | Legacy PIA server (`sipi.participatory-archives.ch`), reachable only via VPN since 2026; also the current `pending` address. |
 
-Why: the PIA image server is no longer public, so the Manifests stopped displaying images. Making the source a configuration choice means the Manifests can be rebuilt on another host without changing their `id`, which is what the published URLs rely on.
+`requiredStatement` credits the `attribution` of `project.yml` and names the labelled image sources actually used.
 
-Behaviour:
-
-- Image API 2.x services are written as `ImageService2` with `@id` and `@type`, and image bodies as `{service}/full/full/0/default.jpg`. Image API 3.0 services are written as `ImageService3`, with bodies as `{service}/full/max/0/default.jpg`, and `maxArea` is taken into account.
-- Dimensions always come from `info.json` and are cached across Manifests. Canvas `height` and `width` come from the default image; each body of a `Choice` carries its own dimensions.
-- If an image cannot be resolved from any source, the script stops for that album, lists the missing stems and writes nothing. With `--allow-gaps`, missing images are omitted and reported instead. A Canvas without dimensions is never written.
-- Canvas ids keep the number of their position in the sequence file, so the ids of the remaining Canvases do not change when images are omitted.
-- In the layers Manifest, a page whose variants are unavailable keeps its default image; a `Choice` reduced to one image is written as a plain image body. The script reports pages with full states, reduced states and a single view.
-- `requiredStatement` credits the CAS / EKWS photo archive, Basel, and names the image host(s) actually used. `rights` stays CC BY-NC 4.0 as stated by the owner.
-
-### Running
+## Running
 
 ```bash
-cd iiif-photoalbum
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python iiif-album.py                     # both albums, fails if an image is missing
-python iiif-album.py --allow-gaps        # omit missing images and report them
+python iiif-album.py                     # all albums
 python iiif-album.py SGV_10A_00050       # a single album
-python validate.py                       # check the generated Manifests
-python validate.py --url                 # check the published Manifests
-python check_memobase.py                 # probe Memobase, writes memobase_check.csv
+python validate.py                       # check the generated Manifests and Collections
+python validate.py --url                 # check the published versions
 ```
 
-On Python 3.14, `iiif-prezi3` 1.x pins a Pillow version that has no wheel and fails to build. Install a recent Pillow wheel first and then `pip install --no-deps "iiif-prezi3<2" "pydantic<2" requests jsonschema`. Pillow is not used by the script.
+`iiif-album.py` exits with an error when an album could not be built; its report is in `build-report.md`.
+
+On Python 3.12 and later, `iiif-prezi3` 1.x pins a Pillow version that has no wheel and fails to build. Use Python 3.11, or install a recent Pillow wheel first and then `pip install --no-deps "iiif-prezi3<2" "pydantic<2" requests jsonschema PyYAML`.
 
 `validate.py` runs three separate checks, because the IIIF Presentation validator checks schema conformance only:
 
 1. Schema: the [IIIF Presentation validator](https://presentation-validator.iiif.io/) (target `okay: 1`). Local files are posted to it; files larger than its request limit are checked against the validator's JSON Schema locally.
-2. Images: every image body, thumbnail and service `info.json` answers with HTTP 200.
-3. Collections: every Manifest listed in the published Collections is among the generated Manifests.
+2. Images: every image body, thumbnail and service `info.json` answers with HTTP 200 and sends a CORS header. With `--images-warn`, images that do not answer are listed without failing (useful while images are pending).
+3. Collections: every item of the Collections is among the generated files.
 
 Whether the chosen layers are meaningful is not checked automatically.
 
+## Publishing
+
+The `site/` folder is laid out as published: `{base_url}/manifests/{id}.json` and `{base_url}/collections/{id}.json`. Once a Manifest has been cited, keep `base_url` and the album and view names unchanged.
+
+- **GitHub Pages**: leave `base_url` empty in `project.yml` (the ids then use `https://<owner>.github.io/<repository>`), set Settings > Pages > Source to *GitHub Actions*, and add the repository variable `DEPLOY_PAGES` = `true`. The workflow in `.github/workflows/build.yml` then builds, validates and publishes on every push; its report appears on the run's summary page.
+- **Another web server**: set `base_url` and copy the contents of `site/` there. The server must send `Access-Control-Allow-Origin: *` with the JSON files.
+
+Without `DEPLOY_PAGES`, the workflow only builds and validates, as for this repository.
+
+### The examples
+
+The SGV_10 Manifests are published at `https://julsraemy.ch/hostiiing` (the `site/` folder is copied there).
+
+- _All scans_: all digitised pages, with scans of pages with protective film and loose photographs: https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031.json and https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050.json
+- _Paged_: tagged with the `paged` behavior, only the digitised pages, i.e. without protective film and loose photographs: https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_paged.json and https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050_paged.json
+- _Layers_: all digitised pages, the scans with protective film as layers of the relevant Canvases: https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers.json and https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050_layers.json
+
+Collections: https://julsraemy.ch/hostiiing/collections/SGV_10A_00031.json and https://julsraemy.ch/hostiiing/collections/SGV_10A_00050.json
+
+While the Manifests are rebuilt, `notice` in `project.yml` adds an "Under construction" notice with the image coverage to the Manifests and Collections. Set `enabled: false` and rebuild to remove it.
+
 ### Known gaps (October 2026)
 
-Memobase holds only the default capture of pages that carry photographs. None of the variants (`_mit_Schutz`, `_mit_Zusatz`, `_mit_Kordel`, `_mit_Zusatzmaterial`) are on Memobase, so the layers Manifests currently contain no `Choice` at all.
+Memobase holds only the default capture of pages that carry photographs. None of the variants (`_mit_Schutz`, `_mit_Zusatz`, `_mit_Kordel`, `_mit_Zusatzmaterial`) are on Memobase, so the layers of the layers Manifests do not display yet.
 
-- SGV_10A_00031: 35 of 128 images resolved. Missing: pages 032 to 081 (the last third of the album, left empty), all variants, and the verso of the loose photograph 09861. The paged Manifest has 34 of 84 pages.
-- SGV_10A_00050: 24 of 71 images resolved. Missing: the even pages 004 to 022, every page from 023 to 038 (odd pages with photographs included), and all variants. The paged Manifest has 14 of 40 pages.
+- SGV_10A_00031: 35 of 128 images served. Missing: pages 032 to 081 (the last third of the album, left empty), all variants, and the verso of the loose photograph 09861.
+- SGV_10A_00050: 24 of 71 images served. Missing: the even pages 004 to 022, every page from 023 to 038 (odd pages with photographs included), and all variants.
 
 These gaps are expected to close once the EKWS files are served through `self_hosted`.
 
-## Manifests
+## Tools for the examples
 
-The Manifests are currently hosted at `https://julsraemy.ch/hostiiing/manifests/{id}`.
-
-- _All scans_: A Manifest containing all digitised pages, with scans of pages with protective film and loose photographs: https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031.json and https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050.json
-- _Paged_: A Manifest tagged with the `paged` behavior containing only the digitised pages, i.e. without protective film and loose photographs: https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_paged.json and https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050_paged.json
-- _Layers_: A Manifest containing all digitised pages and the scans with protective film are annotated as layers onto the relevant Canvases: https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers.json and https://julsraemy.ch/hostiiing/manifests/SGV_10A_00050_layers.json
-
-Dedicated IIIF Collections pointing to the above Manifests have also been created:
-- https://julsraemy.ch/hostiiing/collections/SGV_10A_00031.json
-- https://julsraemy.ch/hostiiing/collections/SGV_10A_00050.json
+- `tools/check_memobase.py`: probes Memobase for every image of the albums and writes `memobase_check.csv`.
+- `tools/record_dimensions.py`: collects the image sizes of all Manifests in the git history into `recorded_dimensions.json`.

@@ -1,10 +1,10 @@
 """Probe Memobase for the images listed in the album sequence files.
 
-For every file stem in sequence.txt (default captures and variants), test
+For every image in albums/<album>/images.csv (default captures and variants), test
 sgv-002-<stem>-1 .. -N on the Memobase IIIF Image API and write the result
 to memobase_check.csv. Standard library only.
 
-Usage: python check_memobase.py [ALBUM_ID ...] [--max-suffix N]
+Usage: python tools/check_memobase.py [ALBUM_ID ...] [--max-suffix N]
 """
 import argparse
 import csv
@@ -45,8 +45,8 @@ def main():
 
     stems = []
     for album in args.albums:
-        with open(f"{album}/sequence.txt") as f:
-            stems += [line.strip().removesuffix(".tif") for line in f if line.strip()]
+        with open(f"albums/{album}/images.csv", newline="", encoding="utf-8-sig") as f:
+            stems += [row["image"].strip().removesuffix(".tif") for row in csv.DictReader(f) if row["image"].strip()]
 
     jobs = [(s, n) for s in stems for n in range(1, args.max_suffix + 1)]
     with ThreadPoolExecutor(max_workers=8) as pool:

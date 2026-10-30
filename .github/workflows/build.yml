@@ -1,0 +1,56 @@
+# Rebuild and check the Manifests whenever albums/ or project.yml change.
+# The build report is shown on the summary page of each run (Actions tab).
+#
+# To publish on GitHub Pages: Settings > Pages > Source: GitHub Actions, then
+# Settings > Secrets and variables > Actions > Variables: DEPLOY_PAGES = true.
+# Leave base_url empty in project.yml so the ids use the Pages address.
+name: Build IIIF Manifests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"  # iiif-prezi3 1.x needs Pillow 9, which has no newer wheels
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Build Manifests
+        run: python iiif-album.py
+      - name: Add build report to the summary
+        if: always()
+        run: cat build-report.md >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Validate
+        # Images that are not served yet are reported but do not fail the build
+        run: python validate.py --images-warn
+      - uses: actions/upload-pages-artifact@v3
+        if: vars.DEPLOY_PAGES == 'true' && github.event_name != 'pull_request'
+        with:
+          path: site
+
+  deploy:
+    if: vars.DEPLOY_PAGES == 'true' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

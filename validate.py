@@ -1,42 +1,45 @@
-"""Check the generated Manifests.
+"""Check the generated Manifests and Collections.
 
 Three separate checks, since the IIIF validator only checks the schema:
 1. Schema: the IIIF Presentation validator (okay: 1 is the target). Local
    files are posted to the validator; files too large for it are checked
    locally against the validator's own JSON Schema (needs jsonschema).
    With --url, the published Manifests are validated by URL instead.
-2. Images: every image body id, thumbnail and image service info.json answers.
-3. Collections: every Manifest listed in the published Collections exists
-   among the generated Manifests.
+2. Images: every image body id, thumbnail and image service info.json
+   answers, and allows other websites to load it (CORS), which viewers need.
+3. Collections: every item of the Collections is among the generated
+   Manifests and Collections (with --url, the published Collections).
 
-Usage: python validate.py [MANIFEST.json ...] [--url] [--skip-images]
+Usage: python validate.py [FILE.json ...] [--url] [--skip-images] [--images-warn]
 """
 import argparse
 import glob
 import json
+import os
 import sys
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
 
+from photoalbum.images import ORIGIN, USER_AGENT
+from photoalbum.project import load_yaml
+
 validator = "https://presentation-validator.iiif.io/validate"
 schema_url = "https://raw.githubusercontent.com/IIIF/presentation-validator/main/schema/iiif_3_0.json"
-collections = [
-    "https://julsraemy.ch/hostiiing/collections/SGV_10A_00031.json",
-    "https://julsraemy.ch/hostiiing/collections/SGV_10A_00050.json",
-]
 max_post = 100 * 1024  # request size limit of the public validator
 
 http = requests.Session()
+http.headers["Origin"] = ORIGIN
+http.headers["User-Agent"] = USER_AGENT
 
 
-def validate_schema(manifest, use_url):
+def validate_schema(resource, use_url):
     """Return (okay, list of error titles, method)."""
     if use_url:
-        r = http.get(validator, params={"version": "3.0", "url": manifest["id"]}, timeout=120)
+        r = http.get(validator, params={"version": "3.0", "url": resource["id"]}, timeout=120)
         result = r.json()
         return result["okay"] == 1, [e["title"] for e in result.get("errorList", [])], "validator (url)"
-    data = json.dumps(manifest, separators=(",", ":"))
+    data = json.dumps(resource, separators=(",", ":"))
     if len(data.encode()) <= max_post:
         r = http.post(validator, params={"version": "3.0"}, data=data,
                       headers={"Content-Type": "application/json"}, timeout=120)
@@ -45,7 +48,7 @@ def validate_schema(manifest, use_url):
     import jsonschema
     schema = http.get(schema_url, timeout=60).json()
     errors = [f"{'/'.join(map(str, e.absolute_path))}: {e.message[:200]}"
-              for e in jsonschema.Draft7Validator(schema).iter_errors(manifest)]
+              for e in jsonschema.Draft7Validator(schema).iter_errors(resource)]
     return not errors, errors, "local schema"
 
 
@@ -74,48 +77,65 @@ def answers(url):
         # Short connect timeout: unreachable hosts (e.g. the VPN only PIA server) fail fast
         r = http.get(url, timeout=(5, 60), stream=True)
         r.close()
-        return url, r.status_code
+        return url, r.status_code, "Access-Control-Allow-Origin" in r.headers
     except Exception as e:
-        return url, type(e).__name__
+        return url, type(e).__name__, None
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("manifests", nargs="*",
-                        default=sorted(glob.glob("SGV_10A_000*/SGV_10A_000*.json")))
-    parser.add_argument("--url", action="store_true", help="validate the published Manifests by URL")
+    parser.add_argument("files", nargs="*", help="Manifests and Collections (default: all in the output folder)")
+    parser.add_argument("--project", default="project.yml")
+    parser.add_argument("--url", action="store_true", help="validate the published versions by URL")
     parser.add_argument("--skip-images", action="store_true")
+    parser.add_argument("--images-warn", action="store_true",
+                        help="report images that do not answer without failing (e.g. images not served yet)")
     args = parser.parse_args()
+    output = (load_yaml(args.project) if os.path.isfile(args.project) else {}).get("output", "site")
+    files = args.files or sorted(glob.glob(os.path.join(output, "manifests", "*.json"))
+                                 + glob.glob(os.path.join(output, "collections", "*.json")))
 
     ok = True
-    ids = set()
-    for path in args.manifests:
-        with open(path) as f:
-            manifest = json.load(f)
-        ids.add(manifest["id"])
-        valid, errors, method = validate_schema(manifest, args.url)
+    ids, collections = set(), []
+    for path in files:
+        with open(path, encoding="utf-8") as f:
+            resource = json.load(f)
+        ids.add(resource["id"])
+        valid, errors, method = validate_schema(resource, args.url)
         print(f"{path}: schema {'okay: 1' if valid else 'okay: 0'} ({method})")
         for error in errors:
             print(f"  {error}")
         ok &= valid
+        if resource["type"] == "Collection":
+            collections.append((path, resource))
+            continue
         if not args.skip_images:
-            urls = sorted(image_urls(manifest))
+            urls = sorted(image_urls(resource))
             with ThreadPoolExecutor(max_workers=8) as pool:
-                failed = [(u, s) for u, s in pool.map(answers, urls) if s != 200]
+                results = list(pool.map(answers, urls))
+            failed = [(u, s) for u, s, _ in results if s != 200]
+            no_cors = [u for u, s, cors in results if s == 200 and not cors]
             print(f"  images: {len(urls) - len(failed)}/{len(urls)} URLs answer with HTTP 200")
             for url, status in failed:
                 print(f"  {status} {url}")
-            ok &= not failed
+            if no_cors:
+                print(f"  {len(no_cors)} URLs answer without CORS header, viewers may not show them:")
+                for url in no_cors:
+                    print(f"  no CORS {url}")
+            ok &= args.images_warn or not failed
 
-    for url in collections:
-        try:
-            items = [i["id"] for i in http.get(url, timeout=60).json()["items"]]
-        except Exception as e:
-            print(f"{url}: could not be read ({e})")
-            ok = False
-            continue
+    for path, collection in collections:
+        if args.url:
+            try:
+                collection = http.get(collection["id"], timeout=60).json()
+                path = collection["id"]
+            except Exception as e:
+                print(f"{collection['id']}: could not be read ({e})")
+                ok = False
+                continue
+        items = [i["id"] for i in collection["items"]]
         unknown = [i for i in items if i not in ids]
-        print(f"{url}: {len(items) - len(unknown)}/{len(items)} Manifests generated")
+        print(f"{path}: {len(items) - len(unknown)}/{len(items)} items generated")
         for i in unknown:
             print(f"  not generated: {i}")
         ok &= not unknown

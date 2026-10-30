@@ -5,7 +5,7 @@ image source serves yet. The most recent commit wins, so the sizes reported
 by the PIA Cantaloupe server (limited by maxArea) take precedence over the
 older Sipi sizes.
 
-Usage: python record_dimensions.py
+Usage: python tools/record_dimensions.py
 """
 import json
 import re
@@ -31,7 +31,8 @@ def main():
     dims = {}
     for commit in git("rev-list", "HEAD").split():
         for path in git("ls-tree", "-r", "--name-only", commit).split():
-            if not re.match(r"SGV_10A_000\d\d/.+\.json$", path):
+            # Manifests were in the album folders, then in site/manifests/
+            if not re.match(r"(SGV_10A_000\d\d|site/manifests)/.+\.json$", path):
                 continue
             try:
                 manifest = json.loads(git("show", f"{commit}:{path}"))

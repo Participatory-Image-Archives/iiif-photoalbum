@@ -1,0 +1,15 @@
+# Album SGV_10A_00050. Values here replace those of project.yml.
+label: Album SGV_10A_00050
+
+# Shown as label: value pairs; empty values are left out
+metadata:
+  Title: "[Gebundenes Album mit Rosenmuster mit Fotografien eines Patenkindes]"
+  Collection: SGV_10 Familie Kreis
+  Identifier: SGV_10A_00050
+  Year/Period: "1949"
+  Description:
+
+# A Collection of the Manifests of this album, published at
+# {base_url}/collections/SGV_10A_00050.json
+collection:
+  label: IIIF Collection of the SGV_10A_00050 Photo Album

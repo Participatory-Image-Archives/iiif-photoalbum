@@ -1,0 +1,116 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://julsraemy.ch/hostiiing/collections/SGV_10A_00031.json",
+  "type": "Collection",
+  "label": {
+    "en": [
+      "IIIF Collection of the SGV_10A_00031 Photo Album"
+    ]
+  },
+  "summary": {
+    "en": [
+      "Under construction. Images are currently served by Memobase (Memoriav); the page variants and the pages without photographs await the original files from the EKWS. Image coverage: 35 of 128 images."
+    ]
+  },
+  "provider": [
+    {
+      "id": "https://d-nb.info/gnd/1186091584",
+      "type": "Agent",
+      "label": {
+        "en": [
+          "Empirische Kulturwissenschaft Schweiz. Fotoarchiv"
+        ]
+      },
+      "homepage": [
+        {
+          "id": "https://www.ekws.ch/de/archiv",
+          "type": "Text",
+          "label": {
+            "en": [
+              "EKWS Fotoarchiv"
+            ]
+          },
+          "format": "text/html"
+        }
+      ],
+      "logo": [
+        {
+          "id": "https://www.ekws.ch/_next/static/media/ekws-logo-full.bd88c732.svg",
+          "type": "Image",
+          "format": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031.json",
+      "type": "Manifest",
+      "label": {
+        "en": [
+          "Album SGV_10A_00031 (Individuals)"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://media.memobase.ch/iiif/sgv-002-SGV_10A_00031_001-1/open/iiif/2/sgv-002-SGV_10A_00031_001-1.jpg/full/80,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "@id": "https://media.memobase.ch/iiif/sgv-002-SGV_10A_00031_001-1/open/iiif/2/sgv-002-SGV_10A_00031_001-1.jpg",
+              "@type": "ImageService2",
+              "profile": "level2"
+            }
+          ],
+          "format": "image/jpeg"
+        }
+      ]
+    },
+    {
+      "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_paged.json",
+      "type": "Manifest",
+      "label": {
+        "en": [
+          "Album SGV_10A_00031 (Paged)"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://media.memobase.ch/iiif/sgv-002-SGV_10A_00031_001-1/open/iiif/2/sgv-002-SGV_10A_00031_001-1.jpg/full/80,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "@id": "https://media.memobase.ch/iiif/sgv-002-SGV_10A_00031_001-1/open/iiif/2/sgv-002-SGV_10A_00031_001-1.jpg",
+              "@type": "ImageService2",
+              "profile": "level2"
+            }
+          ],
+          "format": "image/jpeg"
+        }
+      ]
+    },
+    {
+      "id": "https://julsraemy.ch/hostiiing/manifests/SGV_10A_00031_layers.json",
+      "type": "Manifest",
+      "label": {
+        "en": [
+          "Album SGV_10A_00031 (Layers)"
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "https://media.memobase.ch/iiif/sgv-002-SGV_10A_00031_001-1/open/iiif/2/sgv-002-SGV_10A_00031_001-1.jpg/full/80,/0/default.jpg",
+          "type": "Image",
+          "service": [
+            {
+              "@id": "https://media.memobase.ch/iiif/sgv-002-SGV_10A_00031_001-1/open/iiif/2/sgv-002-SGV_10A_00031_001-1.jpg",
+              "@type": "ImageService2",
+              "profile": "level2"
+            }
+          ],
+          "format": "image/jpeg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+# Settings shared by every album of this repository.
+# Each album lives in albums/<album id>/ with an album.yml (title, metadata)
+# and an images.csv (which images, in which order, grouped into pages).
+# Values set in an album.yml replace the ones below for that album.
+
+# Where the Manifests and Collections are published. Ids are built as
+# {base_url}/manifests/{id}.json and {base_url}/collections/{id}.json.
+# Once a Manifest has been cited, do not change base_url.
+# Leave it empty to use the GitHub Pages address of the repository
+# (https://<owner>.github.io/<repository>) when built by GitHub Actions.
+base_url: https://julsraemy.ch/hostiiing
+
+# Folder the Manifests and Collections are written to, laid out as published
+output: site
+
+# Language of labels and values
+language: en
+
+summary: A photo album of the SGV_10 Familie Kreis collection, digitised within the Participatory Knowledge Practices in Analogue and Digital Image Archives (PIA) research project
+rights: http://creativecommons.org/licenses/by-nc/4.0/
+# Credit line; the labels of the image sources used are added to it
+attribution: Cultural Anthropology Switzerland (CAS / EKWS) photo archive, Basel
+viewing_direction: left-to-right
+
+provider:
+  id: https://d-nb.info/gnd/1186091584
+  label: Empirische Kulturwissenschaft Schweiz. Fotoarchiv
+  homepage:
+    id: https://www.ekws.ch/de/archiv
+    label: EKWS Fotoarchiv
+  logo:
+    id: https://www.ekws.ch/_next/static/media/ekws-logo-full.bd88c732.svg
+    format: image/svg+xml
+
+# Manifests made from each album. canvases is one of:
+#   layers  one Canvas per page, all its images as layers the viewer can switch
+#   pages   one Canvas per page, with its first image only
+#   images  one Canvas per image
+# exclude_tags leaves out the images tagged so in images.csv.
+# Without views, a single layers Manifest is made, with the album id as id.
+views:
+  - suffix: ""
+    label: Individuals
+    behavior: individuals
+    canvases: images
+  - suffix: _paged
+    label: Paged
+    behavior: paged
+    canvases: pages
+    exclude_tags: [loose]
+  - suffix: _layers
+    label: Layers
+    behavior: paged
+    canvases: layers
+    notice_extra: The Choice layers are in place, but their variant images do not display yet.
+
+# Where images given by file name (not by URL) in images.csv are looked up,
+# in order: the first source whose info.json answers is used. In service,
+# {name} is the file name without extension and {file} the file name.
+# rewrite changes {name} for one source (regular expression, replacement).
+# The Image API version (2 or 3) is read from info.json.
+image_sources:
+  - name: memobase
+    label: Memobase (Memoriav)
+    # The meaning of the -1 suffix is not documented; only -1 has been seen
+    service: https://media.memobase.ch/iiif/sgv-002-{name}-1/open/iiif/2/sgv-002-{name}-1.jpg
+    rewrite:
+      # Loose photographs are filed under SGV_10P_<number>_<r|v>, without the album number
+      - pattern: '^SGV_10[AP]_\d{5}_(\d{5}_[rv])$'
+        replace: 'SGV_10P_\1'
+  - name: self_hosted
+    # Placeholder for the full resolution files of the EKWS, e.g.
+    # https://example.org/iiif/3/{file}; also update pending below
+    service:
+  - name: pia_cantaloupe
+    # Legacy PIA server, reachable only via VPN since 2026
+    enabled: false
+    service: https://sipi.participatory-archives.ch/iiif/3/{file}
+
+# Images that no source serves yet keep their place in the Manifests at this
+# address, so they display as soon as they are served there. Without pending,
+# an image that cannot be found stops the build.
+pending:
+  service: https://sipi.participatory-archives.ch/iiif/3/{file}
+  api: 3
+
+# Dimensions to use for images that cannot be measured, keyed by file name
+# without extension (written by tools/record_dimensions.py)
+known_dimensions: recorded_dimensions.json
+
+# Warnings about the images of one page, compared with its first image
+checks:
+  # Shape: above this difference the layer looks stretched in the viewer
+  aspect_ratio_tolerance: 0.02
+  # Resolution: above this factor zooming does not match between layers
+  resolution_ratio: 2
+
+# Removable notice while the Manifests are rebuilt: set enabled to false and
+# rebuild to remove it from the Manifests and the Collections.
+# {served} and {total} are replaced by the image coverage.
+notice:
+  enabled: true
+  built: "2026-10-29"
+  status: Under construction (rebuilt {built})
+  manifest: >-
+    Under construction. The images of this Manifest are currently served by Memobase (Memoriav),
+    which holds only the default capture of pages with photographs. The page variants
+    (with and without protective interleaf, loose photographs, cord binding) and the pages
+    without photographs are awaiting delivery of the original files from the EKWS and do not
+    display yet. Image coverage: {served} of {total} images.
+  collection: >-
+    Under construction. Images are currently served by Memobase (Memoriav);
+    the page variants and the pages without photographs await the original files from the EKWS.
+    Image coverage: {served} of {total} images.
+
+# Optional Collection of all albums, written to collections/{id}.json. It
+# lists the Collection of each album that has one, otherwise its Manifests.
+# collection:
+#   id: SGV_10
+#   label: Photo albums of the SGV_10 Familie Kreis collection

@@ -2,3 +2,4 @@
 venv/
 memobase_check.csv
 __pycache__/
+build-report.md

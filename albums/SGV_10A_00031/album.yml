@@ -1,0 +1,25 @@
+# Album SGV_10A_00031. Values here replace those of project.yml.
+label: Album SGV_10A_00031
+
+# Shown as label: value pairs; empty values are left out
+metadata:
+  Title: "[Gebundenes Album mit blauem Textileinband zu einer Familienreise nach Norditalien und Gruppenreisen nach Frankreich]"
+  Collection: SGV_10 Familie Kreis
+  Identifier: SGV_10A_00031
+  Year/Period: 1926-1928
+  Description: >-
+    Grossformatiges Album in Kordelbindung im Querformat. Blauer Textileinband mit Lochung aber ohne erhaltene
+    Kordel. Hellgrau marmoriertes Vorsatzpapier, ein Leinengewebe verstärkt den Buchrücken. 40 dunkelgraue
+    Albumseiten mit Pergamin-Schutzblättern mit jeweils sechs oder mehr Silbergelatine-Abzügen DOP pro Seite.
+    Das Album zeigt die Familie Kreis auf einer Norditalienreise 1927 durch Mailand, Venedig, Pisa und Florenz
+    sowie Gruppenausflügen von Walter Kreis nach Grenoble, Arles, Lyon und Strassburg und ins Wallis. Die Reisen
+    sind mit Ortsangabe und Datum handschriftlich betitelt. Das Album gehörte sehr wahrscheinlich Walter Kreis
+    und ein Grossteil der Fotografien wurden von ihm hergestellt. Die Fotografien wurden mit doppelseitigen,
+    dreieckigen Fotoklebern montiert. Das letzte Albumdrittel wurde leer gelassen. Kleine Etikette im hinteren
+    Buchdeckel unten rechts “Papyrus Basel AG Basel”. Das Album und die enthaltenen Fotografien wurden
+    gereinigt und restauriert.
+
+# A Collection of the Manifests of this album, published at
+# {base_url}/collections/SGV_10A_00031.json
+collection:
+  label: IIIF Collection of the SGV_10A_00031 Photo Album
