@@ -18,6 +18,11 @@ metadata:
     dreieckigen Fotoklebern montiert. Das letzte Albumdrittel wurde leer gelassen. Kleine Etikette im hinteren
     Buchdeckel unten rechts “Papyrus Basel AG Basel”. Das Album und die enthaltenen Fotografien wurden
     gereinigt und restauriert.
+  # From the Memobase records of the album (Fotobestand Familie Kreis)
+  Places: Strassburg; Lyon; Arles; Grenoble; Pisa; Florenz; Mailand; Venedig; Lugano
+  Contributors: Papyrus AG Basel (Albumhersteller:in); Walter Kreis (Ehemalige Albumbesitzer:in)
+  Rights holder: Empirische Kulturwissenschaft Schweiz (EKWS)
+  Terms of use: Die Empirische Kulturwissenschaft Schweiz bitte über die Nutzung informieren (https://www.ekws.ch/de/archiv/kontakt)
 
 # A Collection of the Manifests of this album, published at
 # {base_url}/collections/SGV_10A_00031.json
@@ -27,10 +32,34 @@ collection:
 # Linked Art record of the album, published at
 # {base_url}/objects/SGV_10A_00031.json and linked from its Manifests
 linked_art:
+  # Title and Description come from metadata above; they are in German
+  language: de
   label: Album 31 (SGV_10A_00031)
   classified_as:
     - id: http://vocab.getty.edu/aat/300026695
       label: photo album
+      type_of_work: true
   produced:
     begin: "1926-01-01T00:00:00Z"
     end: "1928-12-31T23:59:59Z"
+  # EKWS owns and keeps the album (GND of its photo archive)
+  owner:
+    id: https://d-nb.info/gnd/1186091584
+    label: Empirische Kulturwissenschaft Schweiz. Fotoarchiv
+  # Maker of the blank album, from Memobase (Albumhersteller:in). The former owner,
+  # Walter Kreis, has no authority record (GND) yet, so he is only named in the description.
+  makers:
+    - id: https://d-nb.info/gnd/1085799301
+      label: Papyrus AG (Basel)
+      role: Manufacture of the album (Albumhersteller:in)
+  # Places shown in the photographs, from Memobase (Räumliche Abdeckung), as Getty TGN
+  places:
+    - {id: http://vocab.getty.edu/tgn/7012346, label: Strasbourg}
+    - {id: http://vocab.getty.edu/tgn/7008772, label: Lyon}
+    - {id: http://vocab.getty.edu/tgn/7008775, label: Arles}
+    - {id: http://vocab.getty.edu/tgn/7008759, label: Grenoble}
+    - {id: http://vocab.getty.edu/tgn/7006082, label: Pisa}
+    - {id: http://vocab.getty.edu/tgn/7000457, label: Firenze}
+    - {id: http://vocab.getty.edu/tgn/7005903, label: Milano}
+    - {id: http://vocab.getty.edu/tgn/7018159, label: Venezia}
+    - {id: http://vocab.getty.edu/tgn/7007289, label: Lugano}

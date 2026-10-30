@@ -3,31 +3,138 @@
   "id": "https://julsraemy.ch/hostiiing/objects/SGV_10A_00050.json",
   "type": "HumanMadeObject",
   "_label": "Album SGV_10A_00050",
-  "identified_by": [
-    {
-      "type": "Name",
-      "content": "Album SGV_10A_00050"
-    },
-    {
-      "type": "Identifier",
-      "content": "SGV_10A_00050"
-    }
-  ],
   "classified_as": [
     {
       "id": "http://vocab.getty.edu/aat/300026695",
       "type": "Type",
-      "_label": "photo album"
+      "_label": "photo album",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300435443",
+          "type": "Type",
+          "_label": "Type of Work"
+        }
+      ]
+    }
+  ],
+  "identified_by": [
+    {
+      "type": "Name",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300404670",
+          "type": "Type",
+          "_label": "Primary Name"
+        }
+      ],
+      "content": "Album SGV_10A_00050"
+    },
+    {
+      "type": "Name",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300404669",
+          "type": "Type",
+          "_label": "Display Title"
+        }
+      ],
+      "content": "[Gebundenes Album mit Rosenmuster mit Fotografien eines Patenkindes]",
+      "language": [
+        {
+          "id": "http://vocab.getty.edu/aat/300388344",
+          "type": "Language",
+          "_label": "German",
+          "notation": "de"
+        }
+      ]
+    },
+    {
+      "type": "Identifier",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300312355",
+          "type": "Type",
+          "_label": "Accession Number"
+        }
+      ],
+      "content": "SGV_10A_00050",
+      "assigned_by": [
+        {
+          "type": "AttributeAssignment",
+          "carried_out_by": [
+            {
+              "id": "https://d-nb.info/gnd/1186091584",
+              "type": "Group",
+              "_label": "Empirische Kulturwissenschaft Schweiz. Fotoarchiv"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "referred_to_by": [
+    {
+      "type": "LinguisticObject",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300026687",
+          "type": "Type",
+          "_label": "Credit Statement",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300418049",
+              "type": "Type",
+              "_label": "Brief Text"
+            }
+          ]
+        }
+      ],
+      "content": "Cultural Anthropology Switzerland (CAS / EKWS) photo archive, Basel",
+      "language": [
+        {
+          "id": "http://vocab.getty.edu/aat/300388277",
+          "type": "Language",
+          "_label": "English",
+          "notation": "en"
+        }
+      ]
     }
   ],
   "produced_by": {
     "type": "Production",
     "timespan": {
       "type": "TimeSpan",
+      "identified_by": [
+        {
+          "type": "Name",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300404669",
+              "type": "Type",
+              "_label": "Display Title"
+            }
+          ],
+          "content": "1949"
+        }
+      ],
       "begin_of_the_begin": "1949-01-01T00:00:00Z",
       "end_of_the_end": "1949-12-31T23:59:59Z"
     }
   },
+  "current_owner": [
+    {
+      "id": "https://d-nb.info/gnd/1186091584",
+      "type": "Group",
+      "_label": "Empirische Kulturwissenschaft Schweiz. Fotoarchiv"
+    }
+  ],
+  "current_custodian": [
+    {
+      "id": "https://d-nb.info/gnd/1186091584",
+      "type": "Group",
+      "_label": "Empirische Kulturwissenschaft Schweiz. Fotoarchiv"
+    }
+  ],
   "subject_of": [
     {
       "type": "LinguisticObject",

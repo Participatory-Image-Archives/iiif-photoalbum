@@ -17,9 +17,16 @@ collection:
 # Linked Art record of the album, published at
 # {base_url}/objects/SGV_10A_00050.json and linked from its Manifests
 linked_art:
+  # Title and Description come from metadata above; they are in German
+  language: de
   classified_as:
     - id: http://vocab.getty.edu/aat/300026695
       label: photo album
+      type_of_work: true
   produced:
     begin: "1949-01-01T00:00:00Z"
     end: "1949-12-31T23:59:59Z"
+  # EKWS owns and keeps the album (GND of its photo archive)
+  owner:
+    id: https://d-nb.info/gnd/1186091584
+    label: Empirische Kulturwissenschaft Schweiz. Fotoarchiv

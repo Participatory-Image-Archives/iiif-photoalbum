@@ -118,14 +118,31 @@ notice:
 # to objects/{album id}.json, lists every Manifest of the album (subject_of),
 # and each Manifest (and the album's Collection) links to it with seeAlso.
 # With id, no record is written: seeAlso points to that existing record.
+# The record follows the Linked Art API 1.0 Object endpoint. Unless set here,
+# its title, description and display date come from the metadata Title,
+# Description and Year/Period, its credit statement from attribution, and its
+# current custodian from provider; an empty value leaves the property out.
+# Owners, makers, places and the collection are references to other entities:
+# Linked Art requires each to have a URI (GND, Getty TGN, Wikidata, ...).
 # linked_art:
-#   label: Album 31 (SGV_10A_00031)          # default: the album label
+#   label: Album 31 (SGV_10A_00031)          # primary name; default: the album label
+#   language: de                             # of title and description: de, en, fr, it, es
 #   classified_as:                           # Getty AAT terms
 #     - id: http://vocab.getty.edu/aat/300026695
 #       label: photo album
+#       type_of_work: true                   # marks the term as the type of work
 #   produced:                                # optional
 #     begin: "1926-01-01T00:00:00Z"
 #     end: "1928-12-31T23:59:59Z"
+#     # label: 1926-1928                     # date as displayed; default: Year/Period
+#   # title, description, credit           # override the values taken from the metadata
+#   # custodian: {id: https://..., label: ...}   # institution holding it; default: provider
+#   # owner: {id: https://..., label: ...}       # current owner, if known
+#   # makers:                                # parts of the production, with their role
+#   #   - {id: https://d-nb.info/gnd/..., label: ..., role: Manufacture of the album}
+#   # places:                                # places shown, written to visual/{album id}.json
+#   #   - {id: http://vocab.getty.edu/tgn/..., label: ...}
+#   # collection: {id: https://..., label: ...}  # a Linked Art Set the album belongs to
 #   # id: https://example.org/object/...     # optional: use an existing record instead
 
 # Optional Collection of all albums, written to collections/{id}.json. It

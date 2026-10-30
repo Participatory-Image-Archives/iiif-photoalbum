@@ -15,6 +15,17 @@ from .project import is_url
 
 CONTEXT = "http://iiif.io/api/presentation/3/context.json"
 LINKED_ART_CONTEXT = "https://linked.art/ns/v1/linked-art.json"
+# Getty AAT terms used by the Linked Art record, as in the Linked Art API 1.0
+AAT = "http://vocab.getty.edu/aat/"
+PRIMARY_NAME = ("300404670", "Primary Name")
+DISPLAY_TITLE = ("300404669", "Display Title")
+ACCESSION_NUMBER = ("300312355", "Accession Number")
+TYPE_OF_WORK = ("300435443", "Type of Work")
+BRIEF_TEXT = ("300418049", "Brief Text")
+DESCRIPTION = ("300435416", "Description")
+CREDIT_STATEMENT = ("300026687", "Credit Statement")
+LANGUAGES = {"de": ("300388344", "German"), "en": ("300388277", "English"), "fr": ("300388306", "French"),
+             "it": ("300388474", "Italian"), "es": ("300389311", "Spanish")}
 DEFAULT_VIEWS = [{"suffix": "", "behavior": "paged", "canvases": "layers"}]
 
 
@@ -118,6 +129,45 @@ def timestamp(value, end=False):
     if len(value) == 10:
         value += "T23:59:59Z" if end else "T00:00:00Z"
     return value
+
+
+def aat_type(term, nested=None):
+    """A Type from an (AAT number, label) pair, optionally classified itself."""
+    t = {"id": AAT + term[0], "type": "Type", "_label": term[1]}
+    if nested:
+        t["classified_as"] = [aat_type(nested)]
+    return t
+
+
+def language_of(code):
+    """Language reference from a language tag (de, en, fr, it, es)."""
+    if code not in LANGUAGES:
+        raise SystemExit(f"linked_art language '{code}': use one of {', '.join(LANGUAGES)}")
+    number, label = LANGUAGES[code]
+    return {"id": AAT + number, "type": "Language", "_label": label, "notation": code}
+
+
+def statement(term, content, language=None):
+    """A LinguisticObject statement (referred_to_by) classified as a Brief Text."""
+    text = {"type": "LinguisticObject", "classified_as": [aat_type(term, BRIEF_TEXT)], "content": content}
+    if language:
+        text["language"] = [language_of(language)]
+    return text
+
+
+def reference(entity, default_type):
+    """Reference to another entity, given as id and label; Linked Art requires the id."""
+    if not isinstance(entity, dict) or not entity.get("id"):
+        raise SystemExit(f"linked_art: {entity!r} needs an id (the URI of a {default_type}, e.g. from GND, "
+                         "TGN or Wikidata); Linked Art references cannot be written without one")
+    ref = {"id": entity["id"], "type": entity.get("type", default_type)}
+    if entity.get("label"):
+        ref["_label"] = entity["label"]
+    return ref
+
+
+def agent_ref(agent):
+    return reference(agent, "Group")
 
 
 def make_provider(provider):
@@ -437,25 +487,92 @@ class Builder:
         if settings.get("id"):
             self.report.add("info", f"Linked Art: seeAlso to external record {settings['id']}")
             return
-        label = settings.get("label") or album.settings.get("label") or album.id
+        s = album.settings
+        metadata = s.get("metadata") or {}
+        language = settings.get("language")
+        # Values not given in linked_art come from the Manifest metadata; an
+        # empty value in linked_art leaves the property out
+        title = settings.get("title", metadata.get("Title"))
+        description = settings.get("description", metadata.get("Description"))
+        credit = settings.get("credit", s.get("attribution"))
+        # A Set reference needs the URI of the Set, so the Collection metadata is not enough
+        collection = settings.get("collection")
+        provider = s.get("provider")
+        custodian = settings.get("custodian", provider and {"id": provider["id"], "label": provider["label"]})
+        owner = settings.get("owner")
+
+        label = settings.get("label") or s.get("label") or album.id
         record = {"@context": LINKED_ART_CONTEXT, "id": self.linked_art_id(album),
-                  "type": "HumanMadeObject", "_label": label,
-                  "identified_by": [{"type": "Name", "content": label},
-                                    {"type": "Identifier", "content": album.id}]}
+                  "type": "HumanMadeObject", "_label": label}
         if settings.get("classified_as"):
-            record["classified_as"] = [{"id": t["id"], "type": "Type", "_label": t.get("label")}
-                                       if t.get("label") else {"id": t["id"], "type": "Type"}
-                                       for t in settings["classified_as"]]
+            record["classified_as"] = []
+            for term in settings["classified_as"]:
+                t = {"id": term["id"], "type": "Type"}
+                if term.get("label"):
+                    t["_label"] = term["label"]
+                if term.get("type_of_work"):
+                    t["classified_as"] = [aat_type(TYPE_OF_WORK)]
+                record["classified_as"].append(t)
+
+        names = [{"type": "Name", "classified_as": [aat_type(PRIMARY_NAME)], "content": label}]
+        if title:
+            name = {"type": "Name", "classified_as": [aat_type(DISPLAY_TITLE)], "content": str(title)}
+            if language:
+                name["language"] = [language_of(language)]
+            names.append(name)
+        identifier = {"type": "Identifier", "classified_as": [aat_type(ACCESSION_NUMBER)], "content": album.id}
+        if custodian:
+            identifier["assigned_by"] = [{"type": "AttributeAssignment", "carried_out_by": [agent_ref(custodian)]}]
+        record["identified_by"] = names + [identifier]
+
+        statements = []
+        if description:
+            statements.append(statement(DESCRIPTION, str(description), language))
+        if credit:
+            statements.append(statement(CREDIT_STATEMENT, str(credit), self.lang))
+        if statements:
+            record["referred_to_by"] = statements
+
         produced = settings.get("produced") or {}
-        if produced:
-            timespan = {"type": "TimeSpan"}
-            if produced.get("begin"):
-                timespan["begin_of_the_begin"] = timestamp(produced["begin"])
-            if produced.get("end"):
-                timespan["end_of_the_end"] = timestamp(produced["end"], end=True)
-            record["produced_by"] = {"type": "Production", "timespan": timespan}
-        # Makers, places, materials and dimensions would go here (produced_by.carried_out_by,
-        # produced_by.took_place_at, made_of, dimension), once curators choose their vocabularies.
+        date_label = produced.get("label", metadata.get("Year/Period"))
+        makers = settings.get("makers") or []
+        if produced or makers:
+            production = {"type": "Production"}
+            if produced:
+                timespan = {"type": "TimeSpan"}
+                if date_label:
+                    timespan["identified_by"] = [{"type": "Name", "classified_as": [aat_type(DISPLAY_TITLE)],
+                                                  "content": str(date_label)}]
+                if produced.get("begin"):
+                    timespan["begin_of_the_begin"] = timestamp(produced["begin"])
+                if produced.get("end"):
+                    timespan["end_of_the_end"] = timestamp(produced["end"], end=True)
+                production["timespan"] = timespan
+            # Each maker is a part of the production, with its role as label
+            # (e.g. the manufacturer of the blank album, not the compiler)
+            if makers:
+                production["part"] = []
+                for maker in makers:
+                    part = {"type": "Production"}
+                    if maker.get("role"):
+                        part["_label"] = maker["role"]
+                    part["carried_out_by"] = [agent_ref(maker)]
+                    production["part"].append(part)
+            record["produced_by"] = production
+        # Places of production, materials and dimensions would go here (produced_by.took_place_at,
+        # made_of, dimension), once curators choose their vocabularies.
+        # Rights of the digitised images belong to the images, not to the album itself.
+
+        places = settings.get("places") or []
+        if places:
+            visual = self.write_visual_item(album, label, places)
+            record["shows"] = [{"id": visual, "type": "VisualItem", "_label": f"Visual content of {label}"}]
+        if collection:
+            record["member_of"] = [reference(collection, "Set")]
+        if owner:
+            record["current_owner"] = [agent_ref(owner)]
+        if custodian:
+            record["current_custodian"] = [agent_ref(custodian)]
         record["subject_of"] = [
             {"type": "LinguisticObject", "_label": f"IIIF Manifest ({view})" if view else "IIIF Manifest",
              "digitally_carried_by": [{
@@ -467,6 +584,22 @@ class Builder:
         path = os.path.join(self.output, "objects", album.id + ".json")
         self.write_json(path, record)
         self.report.add("info", f"Linked Art record written to {path} ({len(linked)} Manifests linked)")
+
+    def write_visual_item(self, album, label, places):
+        """Linked Art VisualItem of what the album's photographs show, with the places they represent.
+
+        The object can only refer to it (shows), so it is a record of its own.
+        """
+        visual_id = f"{self.base}/visual/{album.id}.json"
+        visual = {"@context": LINKED_ART_CONTEXT, "id": visual_id, "type": "VisualItem",
+                  "_label": f"Visual content of {label}",
+                  "identified_by": [{"type": "Name", "classified_as": [aat_type(PRIMARY_NAME)],
+                                     "content": f"Visual content of {label}"}],
+                  "represents": [reference(place, "Place") for place in places]}
+        path = os.path.join(self.output, "visual", album.id + ".json")
+        self.write_json(path, visual)
+        self.report.add("info", f"Linked Art visual item written to {path} ({len(places)} places)")
+        return visual_id
 
     # --- Collections -----------------------------------------------------
 
@@ -512,7 +645,7 @@ class Builder:
     def write_index(self):
         """List everything in the output folder, with links to open it in viewers."""
         entries = []
-        for kind in ["collections", "manifests", "objects"]:
+        for kind in ["collections", "manifests", "objects", "visual"]:
             folder = os.path.join(self.output, kind)
             for name in sorted(os.listdir(folder)) if os.path.isdir(folder) else []:
                 if name.endswith(".json"):
@@ -520,9 +653,9 @@ class Builder:
                         resource = json.load(f)
                     entries.append((kind, f"{kind}/{name}", resource["id"], first_label(resource)))
         def row(kind, path, rid, label):
-            name = "Linked Art" if kind == "objects" else kind[:-1].title()
+            name = {"objects": "Linked Art object", "visual": "Linked Art visual item"}.get(kind, kind[:-1].title())
             cells = f'<td>{name}</td><td>{html.escape(label)}</td><td><a href="{html.escape(path)}">JSON</a></td>'
-            if kind == "objects":
+            if kind in ("objects", "visual"):
                 # Linked Art records are not IIIF: no viewer or IIIF validator
                 return f"<tr>{cells}</tr>"
             return (f'<tr>{cells}'

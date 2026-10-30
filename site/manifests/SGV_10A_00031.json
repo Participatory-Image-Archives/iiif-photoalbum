@@ -71,6 +71,54 @@
     {
       "label": {
         "en": [
+          "Places"
+        ]
+      },
+      "value": {
+        "en": [
+          "Strassburg; Lyon; Arles; Grenoble; Pisa; Florenz; Mailand; Venedig; Lugano"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Contributors"
+        ]
+      },
+      "value": {
+        "en": [
+          "Papyrus AG Basel (Albumhersteller:in); Walter Kreis (Ehemalige Albumbesitzer:in)"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Rights holder"
+        ]
+      },
+      "value": {
+        "en": [
+          "Empirische Kulturwissenschaft Schweiz (EKWS)"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Terms of use"
+        ]
+      },
+      "value": {
+        "en": [
+          "Die Empirische Kulturwissenschaft Schweiz bitte über die Nutzung informieren (https://www.ekws.ch/de/archiv/kontakt)"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
           "Status"
         ]
       },

@@ -3,31 +3,184 @@
   "id": "https://julsraemy.ch/hostiiing/objects/SGV_10A_00031.json",
   "type": "HumanMadeObject",
   "_label": "Album 31 (SGV_10A_00031)",
-  "identified_by": [
-    {
-      "type": "Name",
-      "content": "Album 31 (SGV_10A_00031)"
-    },
-    {
-      "type": "Identifier",
-      "content": "SGV_10A_00031"
-    }
-  ],
   "classified_as": [
     {
       "id": "http://vocab.getty.edu/aat/300026695",
       "type": "Type",
-      "_label": "photo album"
+      "_label": "photo album",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300435443",
+          "type": "Type",
+          "_label": "Type of Work"
+        }
+      ]
+    }
+  ],
+  "identified_by": [
+    {
+      "type": "Name",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300404670",
+          "type": "Type",
+          "_label": "Primary Name"
+        }
+      ],
+      "content": "Album 31 (SGV_10A_00031)"
+    },
+    {
+      "type": "Name",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300404669",
+          "type": "Type",
+          "_label": "Display Title"
+        }
+      ],
+      "content": "[Gebundenes Album mit blauem Textileinband zu einer Familienreise nach Norditalien und Gruppenreisen nach Frankreich]",
+      "language": [
+        {
+          "id": "http://vocab.getty.edu/aat/300388344",
+          "type": "Language",
+          "_label": "German",
+          "notation": "de"
+        }
+      ]
+    },
+    {
+      "type": "Identifier",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300312355",
+          "type": "Type",
+          "_label": "Accession Number"
+        }
+      ],
+      "content": "SGV_10A_00031",
+      "assigned_by": [
+        {
+          "type": "AttributeAssignment",
+          "carried_out_by": [
+            {
+              "id": "https://d-nb.info/gnd/1186091584",
+              "type": "Group",
+              "_label": "Empirische Kulturwissenschaft Schweiz. Fotoarchiv"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "referred_to_by": [
+    {
+      "type": "LinguisticObject",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300435416",
+          "type": "Type",
+          "_label": "Description",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300418049",
+              "type": "Type",
+              "_label": "Brief Text"
+            }
+          ]
+        }
+      ],
+      "content": "Grossformatiges Album in Kordelbindung im Querformat. Blauer Textileinband mit Lochung aber ohne erhaltene Kordel. Hellgrau marmoriertes Vorsatzpapier, ein Leinengewebe verstärkt den Buchrücken. 40 dunkelgraue Albumseiten mit Pergamin-Schutzblättern mit jeweils sechs oder mehr Silbergelatine-Abzügen DOP pro Seite. Das Album zeigt die Familie Kreis auf einer Norditalienreise 1927 durch Mailand, Venedig, Pisa und Florenz sowie Gruppenausflügen von Walter Kreis nach Grenoble, Arles, Lyon und Strassburg und ins Wallis. Die Reisen sind mit Ortsangabe und Datum handschriftlich betitelt. Das Album gehörte sehr wahrscheinlich Walter Kreis und ein Grossteil der Fotografien wurden von ihm hergestellt. Die Fotografien wurden mit doppelseitigen, dreieckigen Fotoklebern montiert. Das letzte Albumdrittel wurde leer gelassen. Kleine Etikette im hinteren Buchdeckel unten rechts “Papyrus Basel AG Basel”. Das Album und die enthaltenen Fotografien wurden gereinigt und restauriert.",
+      "language": [
+        {
+          "id": "http://vocab.getty.edu/aat/300388344",
+          "type": "Language",
+          "_label": "German",
+          "notation": "de"
+        }
+      ]
+    },
+    {
+      "type": "LinguisticObject",
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300026687",
+          "type": "Type",
+          "_label": "Credit Statement",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300418049",
+              "type": "Type",
+              "_label": "Brief Text"
+            }
+          ]
+        }
+      ],
+      "content": "Cultural Anthropology Switzerland (CAS / EKWS) photo archive, Basel",
+      "language": [
+        {
+          "id": "http://vocab.getty.edu/aat/300388277",
+          "type": "Language",
+          "_label": "English",
+          "notation": "en"
+        }
+      ]
     }
   ],
   "produced_by": {
     "type": "Production",
     "timespan": {
       "type": "TimeSpan",
+      "identified_by": [
+        {
+          "type": "Name",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300404669",
+              "type": "Type",
+              "_label": "Display Title"
+            }
+          ],
+          "content": "1926-1928"
+        }
+      ],
       "begin_of_the_begin": "1926-01-01T00:00:00Z",
       "end_of_the_end": "1928-12-31T23:59:59Z"
-    }
+    },
+    "part": [
+      {
+        "type": "Production",
+        "_label": "Manufacture of the album (Albumhersteller:in)",
+        "carried_out_by": [
+          {
+            "id": "https://d-nb.info/gnd/1085799301",
+            "type": "Group",
+            "_label": "Papyrus AG (Basel)"
+          }
+        ]
+      }
+    ]
   },
+  "shows": [
+    {
+      "id": "https://julsraemy.ch/hostiiing/visual/SGV_10A_00031.json",
+      "type": "VisualItem",
+      "_label": "Visual content of Album 31 (SGV_10A_00031)"
+    }
+  ],
+  "current_owner": [
+    {
+      "id": "https://d-nb.info/gnd/1186091584",
+      "type": "Group",
+      "_label": "Empirische Kulturwissenschaft Schweiz. Fotoarchiv"
+    }
+  ],
+  "current_custodian": [
+    {
+      "id": "https://d-nb.info/gnd/1186091584",
+      "type": "Group",
+      "_label": "Empirische Kulturwissenschaft Schweiz. Fotoarchiv"
+    }
+  ],
   "subject_of": [
     {
       "type": "LinguisticObject",

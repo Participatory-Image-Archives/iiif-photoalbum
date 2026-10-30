@@ -9,9 +9,13 @@ Three separate checks, since the IIIF validator only checks the schema:
    answers, and allows other websites to load it (CORS), which viewers need.
 3. Collections: every item of the Collections is among the generated
    Manifests and Collections (with --url, the published Collections).
-4. Linked Art: every record in objects/ is JSON with the Linked Art context
-   and points only to generated Manifests, and every seeAlso of a Manifest
-   or Collection to {base_url}/objects/ has its record. Local files only.
+4. Linked Art: every record in objects/ is JSON with the Linked Art context,
+   is a HumanMadeObject whose id is its own published address (as the
+   Linked Art API 1.0 Object endpoint requires), points only to generated
+   Manifests, and every seeAlso of a Manifest
+   or Collection to {base_url}/objects/ has its record. The same for the
+   VisualItem records in visual/, which objects refer to with shows.
+   Local files only.
 
 Usage: python validate.py [FILE.json ...] [--url] [--skip-images] [--images-warn]
 """
@@ -105,35 +109,49 @@ def check_linked_art(output, base_url):
             manifest_ids.add(resource["id"])
         linkers.append((path, resource))
 
-    for path in sorted(glob.glob(os.path.join(output, "objects", "*.json"))):
-        try:
-            with open(path, encoding="utf-8") as f:
-                record = json.load(f)
-        except json.JSONDecodeError as e:
-            print(f"{path}: Linked Art not valid JSON ({e})")
-            ok = False
-            continue
-        if record.get("@context") != linked_art_context:
-            print(f"{path}: Linked Art @context is {record.get('@context')!r}, not {linked_art_context}")
-            ok = False
-        points = access_points(record)
-        unknown = [i for i in points if i not in manifest_ids]
-        print(f"{path}: Linked Art, {len(points) - len(unknown)}/{len(points)} Manifests generated")
-        for i in unknown:
-            print(f"  not generated: {i}")
-        ok &= not unknown
+    records = {}
+    for folder, kind in [("objects", "HumanMadeObject"), ("visual", "VisualItem")]:
+        for path in sorted(glob.glob(os.path.join(output, folder, "*.json"))):
+            try:
+                with open(path, encoding="utf-8") as f:
+                    record = json.load(f)
+            except json.JSONDecodeError as e:
+                print(f"{path}: Linked Art not valid JSON ({e})")
+                ok = False
+                continue
+            records[path] = record
+            if record.get("@context") != linked_art_context:
+                print(f"{path}: Linked Art @context is {record.get('@context')!r}, not {linked_art_context}")
+                ok = False
+            if record.get("type") != kind:
+                print(f"{path}: Linked Art type is {record.get('type')!r}, not {kind!r}")
+                ok = False
+            expected = f"{base_url}/{folder}/{os.path.basename(path)}" if base_url else None
+            if expected and record.get("id") != expected:
+                print(f"{path}: Linked Art id is {record.get('id')!r}, not its published address {expected}")
+                ok = False
+            if kind == "HumanMadeObject":
+                points = access_points(record)
+                unknown = [i for i in points if i not in manifest_ids]
+                print(f"{path}: Linked Art, {len(points) - len(unknown)}/{len(points)} Manifests generated")
+                for i in unknown:
+                    print(f"  not generated: {i}")
+                ok &= not unknown
+            else:
+                print(f"{path}: Linked Art visual item, {len(record.get('represents', []))} places")
 
     if not base_url:
         print("Linked Art seeAlso not checked: no base_url in project.yml")
         return ok
-    prefix = f"{base_url}/objects/"
-    for path, resource in linkers:
-        for see_also in resource.get("seeAlso", []):
-            if see_also["id"].startswith(prefix):
-                record = os.path.join(output, "objects", see_also["id"][len(prefix):])
-                if not os.path.isfile(record):
-                    print(f"{path}: seeAlso {see_also['id']} has no record in {os.path.join(output, 'objects')}")
-                    ok = False
+    links = [(path, see_also["id"], "seeAlso") for path, resource in linkers
+             for see_also in resource.get("seeAlso", [])]
+    links += [(path, shown["id"], "shows") for path, record in records.items() for shown in record.get("shows", [])]
+    for path, target, prop in links:
+        for folder in ["objects", "visual"]:
+            prefix = f"{base_url}/{folder}/"
+            if target.startswith(prefix) and not os.path.isfile(os.path.join(output, folder, target[len(prefix):])):
+                print(f"{path}: {prop} {target} has no record in {os.path.join(output, folder)}")
+                ok = False
     return ok
 
 

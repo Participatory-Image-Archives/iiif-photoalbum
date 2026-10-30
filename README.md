@@ -35,7 +35,7 @@ flowchart LR
     subgraph site["site/"]
         manifests["manifests/*.json"]
         collections["collections/*.json"]
-        objects["objects/*.json<br/>Linked Art records"]
+        objects["objects/*.json, visual/*.json<br/>Linked Art records"]
         index["index.html"]
     end
 
@@ -64,6 +64,7 @@ site/                        generated, laid out as published
   manifests/SGV_10A_00031_layers.json
   collections/SGV_10A_00031.json
   objects/SGV_10A_00031.json   Linked Art record of the album (optional)
+  visual/SGV_10A_00031.json    Linked Art record of what its photographs show (optional)
   index.html                 list of everything, with links to viewers
 build-report.md              generated: what needs attention
 ```
@@ -153,26 +154,50 @@ Both thresholds are set under `checks` in `project.yml`. The build also warns wh
 
 ## Linked Art
 
-A Manifest describes how an album is presented; a [Linked Art](https://linked.art/) record describes what the album is, as a physical object. For each album with a `linked_art` entry in its `album.yml`, the build writes a small record to `objects/{album}.json`, published as `{base_url}/objects/{album}.json`:
+A Manifest describes how an album is presented; a [Linked Art](https://linked.art/) record describes what the album is, as a physical object. For each album with a `linked_art` entry in its `album.yml`, the build writes a record that follows the [Linked Art API 1.0 Object endpoint](https://linked.art/api/1.0/endpoint/physical_object/) to `objects/{album}.json`, published as `{base_url}/objects/{album}.json`:
 
 ```yaml
 linked_art:
-  label: Album 31 (SGV_10A_00031)          # default: the album label
+  label: Album 31 (SGV_10A_00031)          # primary name; default: the album label
+  language: de                             # of title and description: de, en, fr, it, es
   classified_as:                           # Getty AAT terms
     - id: http://vocab.getty.edu/aat/300026695
       label: photo album
+      type_of_work: true                   # marks the term as the type of work
   produced:                                # optional; a date alone is read as a whole day
     begin: "1926-01-01T00:00:00Z"
     end: "1928-12-31T23:59:59Z"
   # id: https://example.org/object/...     # optional: use an existing record instead
 ```
 
-- The record is a `HumanMadeObject` with the label as `Name`, the album id as `Identifier`, the `classified_as` types and, if given, a `produced_by` time span.
-- It lists every Manifest of the album under `subject_of`, following the [Linked Art pattern for IIIF Manifests](https://linked.art/model/digital/).
-- Every Manifest of the album, and its Collection, link back to the record with a `seeAlso` (`type: Dataset`, `format: application/ld+json`, Linked Art profile).
-- With `id`, no record is written: the `seeAlso` points to that existing record, e.g. one published by the archive.
+Most of the record is taken from what the Manifests already say, so it is not entered twice:
 
-Makers, places, materials and dimensions are left out: they need vocabulary choices by the curators. They would go in `produced_by` (`carried_out_by`, `took_place_at`), `made_of` and `dimension`. Without `linked_art`, nothing changes in the Manifests.
+| Linked Art | Taken from | Getty AAT |
+| --- | --- | --- |
+| `identified_by` Name (primary name) | `linked_art.label`, else the album label | Primary Name 300404670 |
+| `identified_by` Name (title) | metadata `Title`, in `language` | Display Title 300404669 |
+| `identified_by` Identifier | album id, assigned by the custodian | Accession Number 300312355 |
+| `classified_as` | `linked_art.classified_as` | e.g. photo album 300026695, with Type of Work 300435443 |
+| `referred_to_by` description | metadata `Description`, in `language` | Description 300435416, Brief Text 300418049 |
+| `referred_to_by` credit statement | `attribution` | Credit Statement 300026687, Brief Text 300418049 |
+| `produced_by` time span | `linked_art.produced`, displayed as metadata `Year/Period` | Display Title 300404669 |
+| `produced_by.part` | `linked_art.makers`, each with its role as label | |
+| `shows` VisualItem | `linked_art.places`: a record `visual/{album}.json` that `represents` them | |
+| `current_custodian` Group | `provider` | |
+| `current_owner` Group | `linked_art.owner` | |
+| `member_of` Set | `linked_art.collection` | |
+| `subject_of` | every Manifest of the album, as in the [Linked Art pattern for IIIF Manifests](https://linked.art/model/digital/) | |
+
+`title`, `description`, `credit` and `custodian` can be set in `linked_art` to replace these values; an empty value leaves the property out.
+
+Owners, makers, places and the collection are references to other entities, and Linked Art requires each reference to have a URI. Give them as `{id, label}`, with an id from an authority file (GND for people and organisations, Getty TGN for places, or Wikidata); the build stops with a message when one is missing. For SGV_10A_00031, the maker (Papyrus AG, Basel) and the places come from its Memobase records. Its former owner, Walter Kreis, has no authority record yet, so he is only named in the description.
+
+Every Manifest of the album, and its Collection, link back to the record with a `seeAlso` (`type: Dataset`, `format: application/ld+json`, Linked Art profile). With `id`, no record is written: the `seeAlso` points to that existing record, e.g. one published by the archive. Without `linked_art`, nothing changes in the Manifests.
+
+Left out on purpose:
+
+- The licence (`rights`) concerns the digitised images, not the album; Linked Art attaches such rights to the images.
+- Former owners, the place of production, materials and dimensions need authority records or vocabulary choices by the curators. They would go in `changed_ownership_through`, `produced_by.took_place_at`, `made_of` and `dimension`.
 
 ## Image sources
 
@@ -211,7 +236,7 @@ On Python 3.12 and later, `iiif-prezi3` 1.x pins a Pillow version that has no wh
 1. Schema: the [IIIF Presentation validator](https://presentation-validator.iiif.io/) (target `okay: 1`). Local files are posted to it; files larger than its request limit are checked against the validator's JSON Schema locally.
 2. Images: every image body, thumbnail and service `info.json` answers with HTTP 200 and sends a CORS header. With `--images-warn`, images that do not answer are listed without failing (useful while images are pending).
 3. Collections: every item of the Collections is among the generated files.
-4. Linked Art: every record in `objects/` has the Linked Art `@context` and points only to generated Manifests, and every `seeAlso` to `{base_url}/objects/` has its record. This check uses local files only.
+4. Linked Art: every record in `objects/` (and `visual/`) has the Linked Art `@context`, is a `HumanMadeObject` (a `VisualItem`) whose `id` is its published address, the objects point only to generated Manifests, and every `seeAlso` and `shows` has its record. This check uses local files only.
 
 Whether the chosen layers are meaningful is not checked automatically.
 
