@@ -1,5 +1,7 @@
 # IIIF Manifests for layered photo albums
 
+[![DOI](https://zenodo.org/badge/621672259.svg)](https://doi.org/10.5281/zenodo.23794320)
+
 This repository turns a spreadsheet of images into [IIIF Presentation API 3.0](https://iiif.io/api/presentation/3.0/) Manifests (and, if wanted, Collections) for photo albums that were digitised in layers: the same page with and without its protective interleaf, with an insert, with its cord, and so on. In a IIIF viewer such as Mirador, the layers of a page can be switched on the same Canvas.
 
 It does not host images. You point to images that are already online (on a IIIF image server, or as plain JPEG/PNG files); the tool finds their sizes, builds the Manifests, checks them and writes them as JSON files that can be published on GitHub Pages or any web server.
@@ -221,3 +223,25 @@ These gaps are expected to close once the EKWS files are served through `self_ho
 
 - `tools/check_memobase.py`: probes Memobase for every image of the albums and writes `memobase_check.csv`.
 - `tools/record_dimensions.py`: collects the image sizes of all Manifests in the git history into `recorded_dimensions.json`.
+
+## Citation
+
+[![DOI](https://zenodo.org/badge/621672259.svg)](https://doi.org/10.5281/zenodo.23794320)
+
+If you use this software, please cite it as below (see also [CITATION.cff](CITATION.cff)):
+
+> Raemy, J. A. (2026). *iiif-photoalbum* (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23794321
+
+```bibtex
+@software{raemy_iiif_photoalbum_2026,
+  author    = {Raemy, Julien Antoine},
+  title     = {iiif-photoalbum},
+  version   = {1.0.0},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.23794321},
+  url       = {https://doi.org/10.5281/zenodo.23794321}
+}
+```
+
+To cite all versions rather than this one, use https://doi.org/10.5281/zenodo.23794320.

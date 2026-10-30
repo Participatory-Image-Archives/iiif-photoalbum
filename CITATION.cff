@@ -17,7 +17,14 @@ authors:
   given-names: "Julien Antoine"
   orcid: "https://orcid.org/0000-0002-4711-5759"
 version: 1.0.0
-doi: 10.5281/zenodo.XXXXX
+doi: 10.5281/zenodo.23794321
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23794321
+    description: "This version (1.0.0)"
+  - type: doi
+    value: 10.5281/zenodo.23794320
+    description: "All versions"
 date-released: 2026-10-30
 license: Apache-2.0
 repository-code: "https://github.com/Participatory-Image-Archives/iiif-photoalbum"
