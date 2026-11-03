@@ -215,6 +215,27 @@ For the examples:
 
 `requiredStatement` credits the `attribution` of `project.yml` and names the labelled image sources actually used.
 
+## Hosting your own images
+
+When nobody serves an image yet, you can host it yourself as IIIF Image API level 0 tiles: pre-made JPEG files on any static web host, such as GitHub Pages. No image server is needed. The SGV_10 albums do this for what Memobase does not hold, about 130 images in the `hostiiing` repository.
+
+1. List the paths of the images to host in a text file, one per line. Leave out those already served elsewhere.
+2. Make the tiles in your local copy of the web site, with [iiif-tiler](https://github.com/glenrobson/iiif-tiler) (needs Java):
+   ```bash
+   tools/tile_images.sh my-list.txt ~/Git/hostiiing/images https://julsraemy.ch/hostiiing/images/
+   ```
+3. Commit and push the tile folders only, never the original TIFFs: git keeps them in its history for good.
+4. Once they are online, add the address to `image_sources` in `project.yml` and rebuild. The build reads the sizes from the published `info.json`, so the tiles must be online first.
+   ```yaml
+   - name: self_hosted
+     service: https://julsraemy.ch/hostiiing/images/{name}
+   ```
+
+Keep in mind:
+
+- Level 0 has only the prepared tiles and sizes. Viewers cope with this, and the thumbnails use a size listed in `info.json`.
+- Tiles take room: the SGV_10 images, about 3,700 px on the long side, came to about 4.75 MB and 28 files each. GitHub Pages sites are limited to about 1 GB. Check the total before committing, since retiling adds to the git history again.
+
 ## Running
 
 ```bash
@@ -270,8 +291,9 @@ Memobase holds only the default capture of pages that carry photographs. The pag
 
 Images that are not served yet stay at their `pending` address and do not display.
 
-## Tools for the examples
+## Tools
 
+- `tools/tile_images.sh`: makes level 0 tiles, see [Hosting your own images](#hosting-your-own-images).
 - `tools/check_memobase.py`: probes Memobase for every image of the albums and writes `memobase_check.csv`.
 - `tools/record_dimensions.py`: collects the image sizes of all Manifests in the git history into `recorded_dimensions.json`.
 
@@ -281,13 +303,13 @@ Images that are not served yet stay at their `pending` address and do not displa
 
 If you use this software, please cite it as below (see also [CITATION.cff](CITATION.cff)):
 
-> Raemy, J. A. (2026). *iiif-photoalbum* (Version 1.1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23794320
+> Raemy, J. A. (2026). *iiif-photoalbum* (Version 1.2.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23794320
 
 ```bibtex
 @software{raemy_iiif_photoalbum_2026,
   author    = {Raemy, Julien Antoine},
   title     = {iiif-photoalbum},
-  version   = {1.1.0},
+  version   = {1.2.0},
   year      = {2026},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.23794320},

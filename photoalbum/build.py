@@ -113,7 +113,16 @@ def make_body(image, label=None):
 def make_thumbnail(image):
     if image["kind"] == "static":
         return ResourceItem(id=image["url"], type="Image", format=image["format"])
-    thumbnail = ResourceItem(id=image["url"] + "/full/80,/0/default.jpg", type="Image", format="image/jpeg")
+    size = "80,"
+    if image["profile"] == "level0":
+        # Level 0 images only have the sizes listed in their info.json
+        sizes = sorted(image.get("sizes") or [], key=lambda s: s["width"])
+        chosen = next((s for s in sizes if s["width"] >= 80), sizes[-1] if sizes else None)
+        if chosen:
+            size = f"{chosen['width']}," if image["api"] == 2 else f"{chosen['width']},{chosen['height']}"
+        else:
+            size = "full" if image["api"] == 2 else "max"
+    thumbnail = ResourceItem(id=f"{image['url']}/full/{size}/0/default.jpg", type="Image", format="image/jpeg")
     thumbnail.service = [make_service(image)]
     return thumbnail
 

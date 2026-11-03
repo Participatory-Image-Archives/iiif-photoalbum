@@ -69,6 +69,7 @@ image_sources:
         replace: 'SGV_10P_\1'
   - name: self_hosted
     # Level 0 tiles of the files delivered by the EKWS, in the hostiiing repository
+    # (made with tools/tile_images.sh)
     service: https://julsraemy.ch/hostiiing/images/{name}
   - name: pia_cantaloupe
     # Legacy PIA server, reachable only via VPN since 2026

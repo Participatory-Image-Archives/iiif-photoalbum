@@ -65,7 +65,7 @@ class Images:
             scale = math.sqrt(max_area / (w * h))
             w, h = int(w * scale), int(h * scale)
         return {"kind": "iiif", "url": service, "api": api, "profile": service_profile(info),
-                "format": "image/jpeg", "width": w, "height": h,
+                "format": "image/jpeg", "width": w, "height": h, "sizes": info.get("sizes") or [],
                 "cors": "Access-Control-Allow-Origin" in response.headers}
 
     def static(self, url):
