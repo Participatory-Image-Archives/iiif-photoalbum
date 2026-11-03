@@ -210,7 +210,7 @@ For the examples:
 | Source | Status | Image API | Notes |
 | --- | --- | --- | --- |
 | `memobase` | enabled | 2.x | Memobase (Memoriav) media service. `SGV_10A_00031_005` becomes `sgv-002-SGV_10A_00031_005-1`; loose photographs such as `SGV_10A_00031_09861_r` become `sgv-002-SGV_10P_09861_r-1`. Derivatives with a long side of 2400 px. |
-| `self_hosted` | not set | 3.0 | Placeholder for the full resolution files requested from the EKWS. Set its `service` (and `pending`) once they are served. |
+| `self_hosted` | enabled | 3.0 | Level 0 tiles of the files delivered by the EKWS (about 3,700 px on the long side), at `https://julsraemy.ch/hostiiing/images/{name}`. Used for what Memobase does not hold. |
 | `pia_cantaloupe` | disabled | 3.0 | Legacy PIA server (`sipi.participatory-archives.ch`), reachable only via VPN since 2026; also the current `pending` address. |
 
 `requiredStatement` credits the `attribution` of `project.yml` and names the labelled image sources actually used.
@@ -261,14 +261,14 @@ Collections: https://julsraemy.ch/hostiiing/collections/SGV_10A_00031.json and h
 
 While the Manifests are rebuilt, `notice` in `project.yml` adds an "Under construction" notice with the image coverage to the Manifests and Collections. Set `enabled: false` and rebuild to remove it.
 
-### Known gaps (October 2026)
+### Known gaps (November 2026)
 
-Memobase holds only the default capture of pages that carry photographs. None of the variants (`_mit_Schutz`, `_mit_Zusatz`, `_mit_Kordel`, `_mit_Zusatzmaterial`) are on Memobase, so the layers of the layers Manifests do not display yet.
+Memobase holds only the default capture of pages that carry photographs. The page variants and the pages without photographs are tiled from the files delivered by the EKWS and served from `hostiiing`. Pages with layers therefore often combine a Memobase default (2400 px) with sharper variants (about 3,700 px).
 
-- SGV_10A_00031: 35 of 128 images served. Missing: pages 032 to 081 (the last third of the album, left empty), all variants, and the verso of the loose photograph 09861.
-- SGV_10A_00050: 24 of 71 images served. Missing: the even pages 004 to 022, every page from 023 to 038 (odd pages with photographs included), and all variants.
+- SGV_10A_00031: 124 of 128 images served. Not delivered: `029_mit_Schutz`, `039`, `055_mit_Schutz` and the verso of the loose photograph 09861.
+- SGV_10A_00050: 71 of 72 images served. Not delivered: `023_mit_Zusatzmaterial02`.
 
-These gaps are expected to close once the EKWS files are served through `self_hosted`.
+Images that are not served yet stay at their `pending` address and do not display.
 
 ## Tools for the examples
 

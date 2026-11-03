@@ -52,7 +52,6 @@ views:
     label: Layers
     behavior: paged
     canvases: layers
-    notice_extra: The Choice layers are in place, but their variant images do not display yet.
 
 # Where images given by file name (not by URL) in images.csv are looked up,
 # in order: the first source whose info.json answers is used. In service,
@@ -69,9 +68,8 @@ image_sources:
       - pattern: '^SGV_10[AP]_\d{5}_(\d{5}_[rv])$'
         replace: 'SGV_10P_\1'
   - name: self_hosted
-    # Placeholder for the full resolution files of the EKWS, e.g.
-    # https://example.org/iiif/3/{file}; also update pending below
-    service:
+    # Level 0 tiles of the files delivered by the EKWS, in the hostiiing repository
+    service: https://julsraemy.ch/hostiiing/images/{name}
   - name: pia_cantaloupe
     # Legacy PIA server, reachable only via VPN since 2026
     enabled: false
@@ -100,17 +98,15 @@ checks:
 # {served} and {total} are replaced by the image coverage.
 notice:
   enabled: true
-  built: "2026-10-29"
+  built: "2026-11-03"
   status: Under construction (rebuilt {built})
   manifest: >-
-    Under construction. The images of this Manifest are currently served by Memobase (Memoriav),
-    which holds only the default capture of pages with photographs. The page variants
-    (with and without protective interleaf, loose photographs, cord binding) and the pages
-    without photographs are awaiting delivery of the original files from the EKWS and do not
-    display yet. Image coverage: {served} of {total} images.
+    Under construction. The images of this Manifest are served by Memobase (Memoriav) and from
+    julsraemy.ch/hostiiing. A few page variants and loose photographs have not been delivered yet
+    and do not display. Image coverage: {served} of {total} images.
   collection: >-
-    Under construction. Images are currently served by Memobase (Memoriav);
-    the page variants and the pages without photographs await the original files from the EKWS.
+    Under construction. Images are served by Memobase (Memoriav) and from julsraemy.ch/hostiiing;
+    a few page variants and loose photographs have not been delivered yet.
     Image coverage: {served} of {total} images.
 
 # Optional Linked Art record of an album, describing the album as a physical
